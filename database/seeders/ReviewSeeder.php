@@ -16,6 +16,7 @@ class ReviewSeeder extends Seeder
         DB::table('reviews')->insert([
             [
                 'user_id' => 1,
+                'booking_id' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
@@ -24,6 +25,7 @@ class ReviewSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
+                'booking_id' => 2,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
@@ -32,6 +34,7 @@ class ReviewSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
+                'booking_id' => 3,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
@@ -40,6 +43,7 @@ class ReviewSeeder extends Seeder
             ],
             [
                 'user_id' => 3,
+                'booking_id' => 4,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
@@ -48,6 +52,7 @@ class ReviewSeeder extends Seeder
             ],
             [
                 'user_id' => 3,
+                'booking_id' => 5,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
@@ -56,6 +61,7 @@ class ReviewSeeder extends Seeder
             ],
             [
                 'user_id' => 4,
+                'booking_id' => 6,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
@@ -64,6 +70,7 @@ class ReviewSeeder extends Seeder
             ],
             [
                 'user_id' => 5,
+                'booking_id' => 7,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
@@ -72,6 +79,7 @@ class ReviewSeeder extends Seeder
             ],
             [
                 'user_id' => 6,
+                'booking_id' => 8,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,

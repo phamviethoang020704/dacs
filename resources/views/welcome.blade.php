@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -1118,4 +1118,493 @@
 });
         </script>
     </body>
+</html> --}}
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DriveLux</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        #header{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-top: 20px;
+            background-color: #FAFAFA;
+            padding-top: 30px;
+            padding-bottom: 150px;
+        }
+        #header-menu{
+            display: flex;
+            gap: 35px;
+        }
+        #header-menu li{
+            list-style: none;
+        }
+        #header-menu a:hover{
+            color: #2CB9AD !important;
+        }
+        #header a{
+            color: #797D86;
+            font-weight: 400;
+            text-decoration: none;
+            transition: all 0.5sease-in-out;
+            font-size: 19px;
+        }
+        #header-menu-login{
+            display: flex;
+            gap: 35px;
+        }
+        .login{
+            color: #FAFAFA !important;
+            transition: all 0.5s ease-in-out;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 50px;
+            background-color: #2C2D2F;
+        }
+        .login:hover {
+            transform: scale(1.025);
+            outline: 2px solid #57d3c9;
+            box-shadow: 4px 5px 17px -4px #2CB9AD;
+            background-color: #2CB9AD;
+        }
+        #menu-main{
+            color: #2CB9AD !important;
+        }
+
+        #container{
+            position: relative;
+            height: 200vh;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url('{{ asset('storage/home/image-hero.png') }}');
+        }
+        #container-textcenter{
+            position: absolute;
+            top: -90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #container-textcenter h2{
+            font-weight: 600;
+            line-height: 120%;
+            text-align: center;
+            color: #2C2D2F;
+            font-size: 76px;
+            unicode-bidi: isolate;
+            width: 60%;
+        }
+        #container-textcenter>h2 span{
+            color: #2CB9AD;
+            font-weight: 700 !important;
+        }
+        #container-textcenter p{
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 160%;
+            letter-spacing: 0.05em;
+            color: #2C2D2F;
+            margin-bottom: 30px;
+            width: 50%;
+            text-align: center;
+        }
+        #container-textcenter div{
+            display: flex;
+            gap: 30px;
+        }
+        #container-textcenter div a{
+            font-size: 19px;
+            color: #FAFAFA !important;
+            transition: all 0.5s ease-in-out;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 50px;
+            background-color: #2C2D2F;
+            text-decoration: none;
+        }
+        #container-textcenter div a:hover{
+            transform: scale(1.025);
+            outline: 2px solid #57d3c9;
+            box-shadow: 4px 5px 17px -4px #2CB9AD;
+            background-color: #2CB9AD;
+        }
+        #container-textleft{
+            position: absolute;
+            top: 300px;
+            left: 100px;
+        }
+        #container-textleft h4{
+            font-weight: 700;
+            line-height: 120%;
+            color: #FAFAFA;
+            margin-bottom: 10px;
+            font-size: 57px;
+        }
+        #container-textleft p{
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 160%;
+            letter-spacing: 0.05em;
+            color: #FAFAFA;
+            width: 80%;
+        }
+        #car-image{
+            position: absolute;
+            top: 230px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+        }
+        #car-image img{
+            width: 80%;
+        }
+        #arrow-line{
+            width: 100%;
+        }
+        #logo-div{
+            display: flex;
+            justify-content: center;
+        }
+        #logo{
+            width: 1000px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        #logo-item{
+            width: fit-content;
+            display: flex;
+            gap: 10px;
+            animation: slide 20s linear infinite;
+        }
+        .logo-items{
+            width:250px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+        }
+        .logo-items img{
+            width: 90%;
+            height: 90%;
+            border-radius: 15px;
+            box-shadow: 0 0 15px #2CB9AD;
+        }
+        @keyframes slide {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+        #slider-container-center{
+            display: flex;
+            justify-content: center;
+        }
+        .slider-container {
+            width: 1200px; /* Hiển thị 3 div mỗi div rộng 100px */
+            overflow: hidden;
+            position: relative;
+        }
+        .slider {
+            display: flex;
+            width: 4800px; /* 6 div * 400px * 2 (clone để tạo hiệu ứng lặp vô hạn) */
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            width: 400px;
+            height: auto;
+            background: #F0F2F4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+        }
+        .btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev { left: 0; }
+        .next { right: 0; }
+        .slide img{
+            width: 100%;
+            height: 200px;
+            border-radius: 20px;
+        }
+        .slide{
+            border-radius: 20px;
+            padding: 20px;
+        }
+        .slide-car-info-div{
+            border-radius: 20px;
+            background-color: white;
+            margin-top: 20px;
+            width: 100%;
+            padding: 20px;
+        }
+        .slide-car-info{
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            align-items: center;
+        }
+        .slide-car-info h1{
+            font-weight: 200;
+            font-size: 15px;
+        }
+        .slide-car-info p{
+            font-size: 15px;
+        }
+        .slide-car-info>p>span{
+            color: #2CB9AD;
+        }
+        .slide a{
+            color: #FAFAFA !important;
+            transition: all 0.5s ease-in-out;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 50px;
+            background-color: #2C2D2F;
+            text-decoration: none;
+            margin: auto;
+        }
+        .slide a:hover{
+            transform: scale(1.025);
+            outline: 2px solid #57d3c9;
+            box-shadow: 4px 5px 17px -4px #2CB9AD;
+            background-color: #2CB9AD;
+        }
+        #slide-a{
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img src="{{ asset('storage/home/logo.png') }}" alt="Logo">
+        <div id="header-menu-login">
+            <div id="header-menu">
+                <li><a href="#" id="menu-main">Trang chủ</a></li>
+                <li><a href="#">Thuê xe</a></li>
+                <li><a href="#">Về chúng tôi</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </div>
+            <div id="Login">
+                @if (Route::has('login'))
+                    <div>
+                        @auth
+                            @if (Auth::user()->role === 'admin')
+                                <a id="account" href="{{ url('/admin') }}">Trang quản trị</a>
+                            @else
+                                <a id="account" href="{{ url('/dashboard') }}">Tài khoản</a>
+                            @endif
+                        @else
+                                <a class="login" href="{{ route('login') }}">Đăng nhập</a>
+                        @endauth
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    <div id="container">
+        <div id="container-textcenter">
+            <h2>Thực hiện ước mơ với <span>DriveLux</span></h2>
+            <p>Trải nghiệm cảm giác hồi hộp trên con đường rộng mở với DriveLux. Lựa chọn cao cấp các loại xe sang trọng và khám phá thế giới theo phong cách. Khám phá trải nghiệm lái xe đỉnh cao.</p>
+            <div>
+                <a href="#">Khám phá</a>
+                <a href="#">Đăng ký</a>
+            </div>
+        </div>
+        <div id="container-textleft">
+            <h4>Ferrari 250 GTO</h4>
+            <p>Trải nghiệm Ferrari 250 GTO Đặt chuyến phiêu lưu ngay</p>
+        </div>
+        <div id="car-image">
+            <img id="car-image" src="{{ asset('storage/home/car-image.png') }}" alt="Logo">
+        </div>
+    </div>
+    <img id="arrow-line" src="{{ asset('storage/home/arrow-line.png') }}" alt="arrow-line">
+    <div id="logo-div">
+        <div id="logo">
+            <div id="logo-item">
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/bentley-logo.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/bmw-logo.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logoaudi.webp') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logojaguar.jpg') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logolanrover.webp') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logolexus.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logomer.jpg') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logorr.jpg') }}" alt="logo-item"></div>
+
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/bentley-logo.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/bmw-logo.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logoaudi.webp') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logojaguar.jpg') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logolanrover.webp') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logolexus.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logomer.jpg') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logorr.jpg') }}" alt="logo-item"></div>
+            </div>
+        </div>
+    </div>
+    <div id="slider-container-center">
+        <div class="slider-container">
+            <div id="slider" class="slider">
+                @foreach ($cars as $car)
+                <div class="slide">
+                    <img src="{{ asset('storage/' . $car->image_url) }}" alt="{{ $car->name }}">
+                    <div class="slide-car-info-div">
+                        <div class="slide-car-info">
+                            <h1>Thương hiệu</h1>
+                            <p id="trademark">{{$car->trademark}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Tên xe</h1>
+                            <p id="name">{{$car->name}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Giá thuê</h1>
+                            <p><span>{{ number_format($car->price_per_day, 0, ',', '.') }} VND/Ngay</span></p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Số chỗ ngồi</h1>
+                            <p>{{$car->seat_count}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Số lượng</h1>
+                            <p>{{$car->remaining_quantity}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Đánh giá</h1>
+                            <p><span>{{ $car->reviews->avg('rating') ?: 5 }}&#9733;</span></p>
+                        </div>
+                        <div id="slide-a">
+                            <a href="/car/show/{{$car->id}}">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                @foreach ($cars as $car)
+                <div class="slide">
+                    <img src="{{ asset('storage/' . $car->image_url) }}" alt="{{ $car->name }}">
+                    <div class="slide-car-info-div">
+                        <div class="slide-car-info">
+                            <h1>Thương hiệu</h1>
+                            <p id="trademark">{{$car->trademark}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Tên xe</h1>
+                            <p id="name">{{$car->name}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Giá thuê</h1>
+                            <p><span>{{ number_format($car->price_per_day, 0, ',', '.') }} VND/Ngay</span></p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Số chỗ ngồi</h1>
+                            <p>{{$car->seat_count}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Số lượng</h1>
+                            <p>{{$car->remaining_quantity}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Đánh giá</h1>
+                            <p><span>{{ $car->reviews->avg('rating') ?: 5 }}&#9733;</span></p>
+                        </div>
+                        <div id="slide-a">
+                            <a href="/car/show/{{$car->id}}">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <button class="btn prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="btn next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </div>
+
+
+    <script>
+        let index = 0;
+        const totalSlides = 6;
+        const visibleSlides = 3;
+        const slider = document.getElementById('slider');
+        let autoSlide = setInterval(() => moveSlide(1), 5000);
+        let isDragging = false;
+        let startX;
+
+        function moveSlide(direction) {
+            index += direction;
+            if (index > totalSlides) {
+                index = 1;
+                slider.style.transition = 'none';
+                slider.style.transform = `translateX(0px)`;
+                setTimeout(() => {
+                    slider.style.transition = 'transform 0.5s ease-in-out';
+                    slider.style.transform = `translateX(${-index * 400}px)`;
+                }, 50);
+                return;
+            }
+            if (index < 0) {
+                index = totalSlides - 1;
+                slider.style.transition = 'none';
+                slider.style.transform = `translateX(${-totalSlides * 400}px)`;
+                setTimeout(() => {
+                    slider.style.transition = 'transform 0.5s ease-in-out';
+                    slider.style.transform = `translateX(${-index * 400}px)`;
+                }, 50);
+                return;
+            }
+            slider.style.transform = `translateX(${-index * 400}px)`;
+            resetAutoSlide();
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlide);
+            autoSlide = setInterval(() => moveSlide(1), 5000);
+        }
+
+        slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX;
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            let moveX = e.pageX - startX;
+            if (moveX > 50) {
+                moveSlide(-1);
+                isDragging = false;
+            }
+            if (moveX < -50) {
+                moveSlide(1);
+                isDragging = false;
+            }
+        });
+
+        slider.addEventListener('mouseup', () => isDragging = false);
+        slider.addEventListener('mouseleave', () => isDragging = false);
+    </script>
+</body>
 </html>
