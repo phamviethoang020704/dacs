@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/car', CarController::class)->names('car')->except(['index','show']);
     Route::resource('/booking', BookingController::class)->names('bookings');
     Route::get('/booking/add_book/{car_id}/{price_per_day}', [BookingController::class, 'create'])->name('bookings.create');
+    Route::post('/dashboard/userReturn/{id}',[DashboardController::class,'userReturn'])->name('dashboard.userReturn');
 });
 Route::middleware('auth','role:admin')->group(function(){
     Route::get('/car/create', [CarController::class, 'create'])->name('car.create');
@@ -53,6 +54,9 @@ Route::middleware('auth','role:admin')->group(function(){
     Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
     Route::post('/admin/bookings/{id}',[AdminController::class,'approveBooking'])->name('admin.approveBooking');
     Route::post('/admin/bookings/adminGiveBack/{id}',[AdminController::class,'adminGiveBack'])->name('admin.adminGiveBack');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/admin/browse',[AdminController::class,'bookingBrowsing']);
+    Route::get('/admin/returnCar',[AdminController::class,'overdueBookings']);
 });
 Route::get('/booking/{id}/edit/{car}',[BookingController::class, 'edit'])->name('booking.edit');
 Route::get('/booking/{id}',[BookingController::class, 'update'])->name('booking.update');
@@ -63,8 +67,8 @@ Route::post('/repcomments/store', [RepCommentController::class, 'store'])->name(
 Route::get('/about',function(){
     return view('user.about');
 });
-Route::view('/feedback', 'user.feedback');
 Route::view('/contact', 'user.contact');
+Route::get('/about', [CarController::class,'CarAbout']);
 
 // Hiển thị trang thông báo yêu cầu xác thực email
 Route::get('/verify-email/{token}', function ($token, Request $request) {
@@ -90,7 +94,7 @@ Route::get('/verify-email/{token}', function ($token, Request $request) {
 
 Route::get('/verify-email', function () {
     if (Auth::check() && Auth::user()->email_verified) {
-        return redirect('/dashboard')->with('success', 'Email của bạn đã được xác thực.');
+        return redirect('/car')->with('success', 'Email của bạn đã được xác thực.');
     }
     return view('auth.verify-email');
 })->middleware('auth');

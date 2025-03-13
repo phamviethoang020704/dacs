@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -24,17 +25,53 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Kiểm tra loại form được gửi
+        if ($request->input('form_type') === 'profile_update') {
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+                'address' => ['nullable', 'string', 'max:255'],
+                'phone' => ['nullable', 'string', 'max:20'],
+            ]);
+
+            $user->fill($request->only(['name', 'email', 'address', 'phone']));
+
+            if ($user->isDirty('email')) {
+                $user->email_verified_at = null;
+            }
+
+            $user->save();
+
+            return Redirect::route('profile.edit')->with('status', 'profile-updated');
         }
 
-        $request->user()->save();
+        if ($request->input('form_type') === 'avatar_update') {
+            $request->validate([
+                'avt_url' => ['required', 'image', 'mimes:jpg,png,jpeg,gif', 'max:2048'], // 2MB
+            ]);
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+            if ($request->hasFile('avt_url')) {
+                // Xóa ảnh cũ nếu có
+                if ($user->avt_url) {
+                    Storage::disk('public')->delete($user->avt_url);
+                }
+
+                // Lưu ảnh mới
+                $file = $request->file('avt_url');
+                $filename = 'avt' . $user->id . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('avatars', $filename, 'public');
+                $user->avt_url = 'avatars/' . $filename;
+                $user->save();
+            }
+
+            return Redirect::route('profile.edit')->with('status', 'avatar-updated');
+        }
+
+        return Redirect::route('profile.edit')->with('status', 'error');
     }
 
     /**

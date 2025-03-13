@@ -18,18 +18,74 @@ class CarController extends Controller
     public function index(Request $request)
     {
         $trademark = $request->get('trademark');
-        $search = $request->get('search');
-        $cars = Car::query();
-        if ($search) {
-            $cars->whereRaw("REPLACE(LOWER(name), ' ', '') LIKE ?", ['%' . str_replace(' ', '', strtolower($search)) . '%']);
-        }
+        $search = $request->get('search'); // Tìm kiếm theo tên xe
+        $priceRange = $request->get('price_range'); // Lọc theo mức giá
+        $seatCount = $request->get('seat_count'); // Lọc theo số chỗ ngồi
+        $rating = $request->get('rating'); // Lọc theo rating từ bảng review
+
+        $cars = Car::query()->with('reviews'); // Gọi quan hệ với bảng review
+
+        // Lọc theo thương hiệu
         if ($trademark && $trademark !== 'all') {
-            // Lọc theo loại xe và thêm phân trang với query string
-            $cars = Car::where('trademark', $trademark)->paginate(9)->onEachSide(1)->withQueryString();
-        } else {
-            // Hiển thị tất cả xe và thêm query string
-            $cars = Car::paginate(9)->onEachSide(1)->withQueryString();
+            $cars->where('trademark', $trademark);
         }
+
+        // Tìm kiếm theo tên xe
+        if ($search) {
+            $searchTerms = explode(' ', trim(preg_replace('/\s+/', ' ', $search))); // Xóa khoảng trắng dư
+            $cars->orderByRaw("
+                CASE
+                    WHEN name LIKE ? THEN 1
+                    WHEN name LIKE ? THEN 2
+                    ELSE 3
+                END
+            ", ["%$search%", "%$search%"]);
+
+            $cars->where(function ($query) use ($searchTerms) {
+                foreach ($searchTerms as $term) {
+                    $query->where('name', 'LIKE', '%' . $term . '%');
+                }
+            });
+        }
+
+        // Lọc theo mức giá
+        if ($priceRange) {
+            switch ($priceRange) {
+                case '<1000000':
+                    $cars->where('price_per_day', '<', 1000000);
+                    break;
+                case '1000000-2000000':
+                    $cars->whereBetween('price_per_day', [1000000, 2000000]);
+                    break;
+                case '2000000-3000000':
+                    $cars->whereBetween('price_per_day', [2000000, 3000000]);
+                    break;
+                case '3000000-4000000':
+                    $cars->whereBetween('price_per_day', [3000000, 4000000]);
+                    break;
+                case '4000000-5000000':
+                    $cars->whereBetween('price_per_day', [4000000, 5000000]);
+                    break;
+                case '>5000000':
+                    $cars->where('price_per_day', '>', 5000000);
+                    break;
+            }
+        }
+
+        // Lọc theo số chỗ ngồi
+        if ($seatCount) {
+            $cars->where('seat_count', $seatCount);
+        }
+
+        // Lọc theo rating từ bảng review
+        if ($rating) {
+            $cars->whereHas('reviews', function ($query) use ($rating) {
+                $query->havingRaw('AVG(rating) > ?', [$rating]);
+            });
+        }
+
+        // Thực hiện phân trang
+        $cars = $cars->paginate(8)->appends(request()->query());
 
         // Danh sách các loại xe
         $trademarks = [
@@ -37,8 +93,11 @@ class CarController extends Controller
             'Land-Rover', 'Lexus', 'Mercedes-Benz', 'Rolls-Royce'
         ];
 
-        return view('car.show_car', compact('cars', 'trademarks', 'trademark', 'search'));
+        return view('car.show_car', compact('cars', 'trademarks', 'trademark', 'search', 'priceRange', 'seatCount', 'rating'));
     }
+
+
+
 
 
     /**
@@ -87,34 +146,6 @@ class CarController extends Controller
     // return redirect('/car/create')->with('success', 'Thêm xe thành công');
     return redirect()->back()->withInput()->with('activeForm', 'addCar')->with('success', 'Thêm xe thành công');
     }
-
-    // public function show($id, Request $request)
-    // {
-    //     $car = Car::with('reviews.user')->findOrFail($id);
-    //     $averageRating = Review::where('car_id', $id)->avg('rating');
-    //     $quantity = Review::where('car_id', $id)->count();
-
-    //     // Lấy số lượng đánh giá theo từng sao
-    //     $reviewCounts = Review::where('car_id', $id)
-    //         ->selectRaw('rating, COUNT(*) as count')
-    //         ->groupBy('rating')
-    //         ->pluck('count', 'rating');
-
-    //     // Lọc theo số sao (nếu có)
-    //     $rating = $request->query('rating');
-    //     $reviewsQuery = Review::where('car_id', $id)
-    //         ->when($rating, function ($query, $rating) {
-    //             return $query->where('rating', $rating);
-    //         })
-    //         ->latest();
-
-    //     // Luôn phân trang và giữ tham số trên URL
-    //     $reviews = $reviewsQuery->paginate(5)->onEachSide(1)->withQueryString();
-
-
-
-    //     return view('car.car_id', compact('car', 'averageRating', 'quantity', 'reviews', 'rating', 'reviewCounts'));
-    // }
     public function show($id, Request $request)
     {
         $car = Car::with('reviews.user')->findOrFail($id);
@@ -202,7 +233,12 @@ class CarController extends Controller
 
     public function CarHome(){
         $cars = Car::inRandomOrder()->take(6)->get();
-        return view('welcome',compact('cars'));
+        $carTopRating = Car::withAvg('reviews','rating')->orderByDesc('reviews_avg_rating')->take(6)->get();
+        return view('welcome',compact('cars','carTopRating'));
+    }
+    public function CarAbout(){
+        $cars = Car::inRandomOrder()->take(6)->get();
+        return view('user.about',compact('cars'));
     }
 
     public function filterCars(Request $request)

@@ -31,12 +31,16 @@ class StoreCarRequest extends FormRequest
             'seat_count' => 'required|integer|min:2',
             'price_per_day' => 'required|integer|min:1',
             'quantity' => 'required|integer|min:1',
-            'remaining_quantity' => 'required|integer|min:0|lte:quantity'
+            'remaining_quantity' => 'required|integer|min:0|lte:quantity',
+            'image_url' => 'required',
+            'related_images' => 'required',
         ];
     }
     public function messages()
     {
         return [
+            'image_url.required' => 'Bạn chưa chọn ảnh xe',
+            'related_images.required' => 'Bạn chưa chọn ảnh liên quan đến xe',
             'trademark.required' => 'Thương hiệu không được để trống',
             'trademark.in' => 'thương hiệu không nằm trong danh sách',
             'description.required' => 'Mô tả không được để trống.',

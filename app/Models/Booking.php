@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 class Booking extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','car_id','start_date','end_date','total_price','admin_give_back'];
+    protected $fillable = ['user_id','car_id','start_date','end_date','total_price','admin_give_back','yourmessage'];
     public function user(){
         return $this->belongsTo(User::class);
     }

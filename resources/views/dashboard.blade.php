@@ -6,40 +6,94 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <title>Car Rental</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <title>DriveLux</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon (1).ico') }}">
     <style>
-        *{
+                *{
             padding: 0;
             margin: 0;
             box-sizing: border-box;
             font-family: sans-serif;
+            scrollbar-width: thin;
+            scrollbar-color: #ff4d30 #fff;
+        }
+        body{
+            background-color: #F0F5F9;
+            height: 100vh;
+            z-index: 1;
+        }
+        #sidebar{
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            bottom: 15px;
+            border-radius: 20px;
+            background-color: white;
+            min-width: 270px;
+        }
+        #sidebarIcon{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        #sidebarIcon>ion-icon{
+            color: #FA4226;
+            font-size: 25px;
+        }
+        #sidebar p{
+            color: 	rgba(0, 0, 0, 0.7);
+            margin-top: 20px;
+            margin-left: 25px;
+        }
+        .menuClass{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-left: 25px;
+            height: 40px;
+            border-bottom-right-radius: 20px;
+            border-top-right-radius: 20px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .menuClass:hover{
+            background-color:#E0F0FB;
+        }
+        .menuClass h2{
+            font-size: 15px;
+            font-weight: 500 !important;
+            line-height: 1.1rem !important;
+            letter-spacing: .009375em !important;
+            font-family: inherit !important;
+
+        }
+        a{
+            text-decoration: none;
+            color: black;
         }
         #header{
+            position: fixed;
+            height: 70px;
+            background-color: white;
+            top: 15px;
+            right: 15px;
+            border-radius: 15px;
+            margin-left: 20px;
+            width: calc(100% - 320px);
             display: flex;
-            justify-content: space-between;
-            background-color: #F3F4F6;
-            height: 50px;
+            justify-content: flex-end;
+            gap: 30px;
+            padding: 0 15px 0 30px;
             align-items: center;
+            box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.4);
+            z-index: 10;
         }
-        #header-left{
-            display: flex;
-            align-items: center;
-            margin-left: 30px;
-        }
-        #header-left ion-icon{
-            color:#FA4226;
-            font-size: 30px;
-            margin-right: 5px;
-        }
-        #header-left h1{
-            padding-top: 5px;
-            padding-left: 5px;
+        #header i{
             font-size: 20px;
-            font-weight: bold;
-        }
-        li{
-            list-style: none;
         }
         #profile-logout a{
             text-decoration: none;
@@ -66,18 +120,22 @@
             cursor: pointer;
         }
         #profile-logout a:hover,#profile-logout button:hover{
-            background-color: #F3F4F6;
+            background-color: #E0F0FB;
         }
         #profile-logout{
             position: relative;
-            height: 50px;
             line-height: 50px;
-            margin-right: 40px;
+            margin-right: 20px;
             cursor: pointer;
             user-select: none;
             z-index: 3;
         }
-        #profile-logout>div{
+        #profile-logout img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        #profile-logout-content{
             position: absolute;
             bottom: -90px;
             right: 0;
@@ -89,63 +147,328 @@
             height: 90px;
             width: 150px;
             display: none;
+            background-color: white;
+            z-index: 4;
         }
-        #user-booking{
-            z-index: 2;
-            margin-top: 50px;
-        }
-        hr{
-            z-index: 2;
-        }
-        #img-info{
+        #profile-avt{
             display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        #img-info p{
-            line-height: 16px;
-            height: 25px;
+        #input-icon{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 76%;
         }
-        #booking-items{
-            height: 165px;
+        #input-icon>div{
+            display: flex;
+            align-items: center;
         }
-        #booking-items img{
-            width: 160px;
-            height: 90px;
+        #input-icon input{
+            padding: 5px;
+            border: none;
+            outline: none;
+        }
+        #profile-logout-content{
+            z-index: 4;
+        }
+        #content{
+            margin-left: 306px;
+            margin-top: 106px;
+            padding: 20px;
+            min-height: 100vh;
+            background-color: white;
+            border-radius: 20px;
             margin-right: 10px;
         }
-        #bold{
-            font-weight: bold;
+        #hello-user{
+            padding: 15px 0;
+            border-bottom: .0625rem solid #efefef;
+            margin-bottom: 20px;
         }
-        #edit-delete{
+        #hello-user h1{
+            color: #333;
+            font-size: 1.125rem;
+            font-weight: 500;
+            line-height: 1.5rem;
+            margin: 0;
+            text-transform: capitalize;
+        }
+        #hello-user p{
+            color: #555;
+            font-size: .875rem;
+            line-height: 1.0625rem;
+            margin-top: .1875rem;
+        }
+        #avatar{
             display: flex;
-            gap: 15px;
-            margin-top: 10px;
+            height: 200px;
+            justify-content: center;
+            align-items: center;
         }
-        #edit-delete a{
-            color: black;
-            background-color: #5CB85C;
-            text-decoration: none;
-            padding: 5px;
+        #infomation{
+            width: 200px;
+            height: 150px;
         }
-        #edit-delete button{
+        .avatar-wrapper{
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-left: 30px;
+        }
+        .avatar-wrapper img{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        .edit-icon{
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: #ff7b00;
             color: white;
-            background-color: #FA4226;
-            border: none;
-            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         }
-        hr{
-            border: 1px solid #ddd;
+        #name-email{
+        }
+        #name-email h4{
+            font-size: 25px;
+            font-weight: 600;
+            color: #2C2D2F;
+            margin-bottom: 10px;
+        }
+        .container{
+            display: flex;
+            gap: 90px;
+        }
+
+        #form-update {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        #form-update p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        #form-update form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #form-update .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        #form-update .form-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        #form-update button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        #form-update button:hover {
+            background-color: #0056b3;
+        }
+
+        #form-update input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #bg-main{
+            background-color:#E0F0FB;
+        }
+
+
+        .booking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+            min-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Phần đầu bảng */
+        .booking-table thead {
+            background-color: #007bff;
+            color: white;
+            text-align: left;
+        }
+
+        .booking-table thead th {
+            padding: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Định dạng từng hàng */
+        .booking-table tbody tr {
+            border-bottom: 1px solid #ddd;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .booking-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Định dạng từng ô */
+        .booking-table td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+        /* Ảnh xe */
+        .booking-table img {
+            width: 80px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Nút bấm */
+        .booking-table button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .booking-table button:hover {
+            background-color: #218838;
+        }
+
+        /* Link sửa */
+        .booking-table a {
+            display: inline-block;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .booking-table a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Nút xóa */
+        .booking-table form button {
+            background-color: #dc3545;
+        }
+
+        .booking-table form button:hover {
+            background-color: #c82333;
+        }
+
+        /* Bo tròn góc bảng */
+        .booking-table {
+            border-radius: 10px;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
+    <div id="sidebar">
+        <div id="sidebarIcon" onclick="window.location.href='http://127.0.0.1:8000/';" style="cursor: pointer">
+            <img src="{{ asset('storage/home/logo.png') }}" alt="Logo">
+        </div>
+        <p>Trang chủ</p>
+        <div class="menuClass"  id="bg-main"  onclick="window.location.href='http://127.0.0.1:8000/admin/dashboard';">
+            <ion-icon name="grid-outline"></ion-icon>
+            <h2>Bảng điều khiển</h2>
+        </div>
+        @if (auth()->user()->role == 'admin')
+        <p>Đơn đặt xe</p>
+        <div class="menuClass"  onclick="window.location.href='http://127.0.0.1:8000/admin';">
+            <i class='bx bx-podcast'></i>
+            <h2  class="">Tất cả</h2>
+        </div>
+        <div class="menuClass" id="menu-bookingBrowsing"  onclick="window.location.href='http://127.0.0.1:8000/admin/browse';">
+            <ion-icon name="checkmark-outline"></ion-icon>
+            <h2  class="">Đơn chưa duyệt</h2>
+        </div>
+        <div class="menuClass" id="menu-overdueBookings"  onclick="window.location.href='http://127.0.0.1:8000/admin/returnCar';">
+            <i class='bx bxl-paypal'></i>
+            <h2  class="">Đơn chưa trả xe</h2>
+        </div>
+        <p>Thêm xe</p>
+        <div class="menuClass" id="addCar"  onclick="window.location.href='http://127.0.0.1:8000/car/create';">
+            <i class='bx bxs-car-wash'></i>
+            <h2>Thêm xe</h2>
+        </div>
+        @endif
+        <p>Thông tin</p>
+        <div class="menuClass"  onclick="window.location.href='http://127.0.0.1:8000/profile';">
+            <i class='bx bx-info-circle'></i>
+            <h2>Thông tin cá nhân</h2>
+        </div>
+    </div>
     <div id="header">
-        <div id="header-left" onclick="window.location.href='http://127.0.0.1:8000/';" style="cursor: pointer">
-            <ion-icon name="car-sport"></ion-icon>
-            <h3>Car Rental</h3>
+        <div id="input-icon">
+            <div>
+                <i class='bx bx-search-alt-2'></i>
+                <input type="text" placeholder="Tìm kiếm...">
+            </div>
+            <i class='bx bx-bell'></i>
         </div>
         <div id="profile-logout">
-            <span>{{Auth::user()->name}} ⇊</span>
+            <div id="profile-avt">
+                <img src="{{asset('storage/' . auth()->user()->avt_url)}}" alt="">
+                <p>{{$user->name}}</p>
+            </div>
             <div id="profile-logout-content">
                 <a href="{{ route('profile.edit') }}">Thông tin</a>
                 <form method="POST" action="{{ route('logout') }}">
@@ -155,46 +478,71 @@
             </div>
         </div>
     </div>
-    <div id="user-booking">
-        <h3>Đơn hàng của bạn:</h3>
-        <hr>
-        @if($bookings->isEmpty())
-            <p>bạn chưa có đơn hàng nào.</p>
-        @else
-            <div id="booking-item">
-                @foreach($bookings as $booking)
-                <div id="booking-items">
-                    <div id="img-info">
-                        <img src="{{ $booking->car ? asset('storage/' . $booking->car->image_url) : asset('default-image.png') }}" alt="{{ $booking->car->name ?? 'No car assigned' }}">
-                        <div>
-                            <p><span id="bold">Hãng xe:</span> {{ $booking->car?->trademark ?? 'Không xác định' }}</p>
-                            <p><span id="bold">Xe:</span> {{ $booking->car->name ?? 'N/A' }}</p>
-                            <p><span id="bold">Tổng giá thuê:</span>   {{ number_format($booking->total_price) }} VND</p>
-                            <p><span id="bold">trạng thái:</span>
-                                @if ($booking->browsing_status)
-                                    Đơn hàng của bạn Đã được duyệt
-                                @else
-                                    Đơn hàng của bạn Chưa được duyệt
-                                @endif
-                            </p>
-                        </div>
-                    </div>
-                    <div id="edit-delete">
-                        <a href="{{route('booking.edit',[$booking->id,$booking->car->id])}}">Sửa đơn hàng</a>
-                        <form action="{{route('booking.destroy', $booking->id)}}" method="POST" onsubmit="return confirm('Ban co chac muon xoa don thue xe nay?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Xóa đơn hàng</button>
-                        </form>
-                    </div>
-                </div>
-                    <hr>
-                @endforeach
-            </div>
-        @endif
+    <div id="content">
+        <div id="bookCar">
+            <table class="booking-table">
+                <thead>
+                    <tr>
+                        <th>Thời gian</th>
+                        <th>Ảnh xe</th>
+                        <th>Ngày BĐ</th>
+                        <th>Ngày KT</th>
+                        <th>Tổng giá</th>
+                        <th>Duyệt</th>
+                        <th>trả xe</th>
+                        <th>Xóa</th>
+                        <th>Sửa</th>
+                      </tr>
+                </thead>
+
+                @if ($bookings->isEmpty())
+                    <p>Bạn chưa có đơn hàng nào</p>
+                @else
+                <tbody>
+                    @foreach ($bookings as $booking)
+                    <tr>
+                        <td>{{$booking->updated_at->format('d/m/y')}}</td>
+                        <td><img src="{{ $booking->car ? asset('storage/' . $booking->car->image_url) : asset('default-image.png') }}" alt="{{ $booking->car->name ?? 'No car assigned' }}"></td>
+                        <td>{{ \Carbon\Carbon::parse($booking->start_date)->format('d/m/Y') }}</td>
+                        <td>{{  \Carbon\Carbon::parse($booking->end_date)->format('d/m/Y')  }}</td>
+                        <td>{{ number_format($booking->total_price, 0, ',', '.') }}</td>
+                        <td>
+                            @if ($booking->browsing_status == true)
+                                <p>đã duyệt</p>
+                            @else
+                                <p>Chưa duyệt</p>
+                        @endif
+                        </td>
+                        <td>
+                            @if ($booking->user_give_back == false)
+                                <form action="{{route('dashboard.userReturn',$booking->id)}}" method="POST">
+                                    @csrf
+                                    <button>Xác nhận</button>
+                                </form>
+                            @else
+                                <p>hoàn tất</p>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('booking.edit', [$booking->id, $booking->car->id]) }}">Sửa đơn hàng</a>
+                        </td>
+                        <td>
+                            <form action="{{route('booking.destroy', $booking->id)}}" method="POST" onsubmit="return confirm('Ban co chac muon xoa don thue xe nay?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Xóa đơn hàng</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+
+                @endif
+            </table>
+        </div>
     </div>
     <script>
-         profileLogout = document.getElementById("profile-logout");
+                profileLogout = document.getElementById("profile-logout");
         profileLogoutContent = document.getElementById("profile-logout-content");
         profileLogoutContent.style.display = "none";
         profileLogout.addEventListener("click",(e) => {
@@ -205,6 +553,18 @@
             if(profileLogoutContent.style.display === 'flex')
             profileLogoutContent.style.display = 'none';
         })
+         // Xử lý chọn ảnh và xem trước ảnh
+         document.getElementById('avatarInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('avatarPreview').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+            document.getElementById('avatarForm').submit(); // Tự động gửi form sau khi chọn ảnh
+        });
     </script>
 </body>
 </html>

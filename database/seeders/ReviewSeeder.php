@@ -20,7 +20,7 @@ class ReviewSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
-                'rating' => 2,
+                'rating' => 5,
                 'comment' => 'Chiếc xe này sở hữu thiết kế sang trọng và hiện đại, thu hút mọi ánh nhìn. Động cơ mạnh mẽ, vận hành êm ái, mang đến trải nghiệm lái tuyệt vời. Tiết kiệm nhiên liệu tối ưu nhưng vẫn đảm bảo hiệu suất vượt trội. Nội thất tiện nghi, công nghệ tiên tiến, tạo cảm giác thoải mái trên mọi hành trình. ',
             ],
             [
@@ -29,7 +29,7 @@ class ReviewSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
-                'rating' => 3,
+                'rating' => 5,
                 'comment' => 'Chiếc xe này sở hữu thiết kế sang trọng và hiện đại, thu hút mọi ánh nhìn. Động cơ mạnh mẽ, vận hành êm ái, mang đến trải nghiệm lái tuyệt vời. Tiết kiệm nhiên liệu tối ưu nhưng vẫn đảm bảo hiệu suất vượt trội. Nội thất tiện nghi, công nghệ tiên tiến, tạo cảm giác thoải mái trên mọi hành trình. ',
             ],
             [
@@ -38,7 +38,7 @@ class ReviewSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
-                'rating' => 4,
+                'rating' => 5,
                 'comment' => 'Chiếc xe này sở hữu thiết kế sang trọng và hiện đại, thu hút mọi ánh nhìn. Động cơ mạnh mẽ, vận hành êm ái, mang đến trải nghiệm lái tuyệt vời. Tiết kiệm nhiên liệu tối ưu nhưng vẫn đảm bảo hiệu suất vượt trội. Nội thất tiện nghi, công nghệ tiên tiến, tạo cảm giác thoải mái trên mọi hành trình. ',
             ],
             [
@@ -84,6 +84,15 @@ class ReviewSeeder extends Seeder
                 'updated_at' => Carbon::now(),
                 'car_id' => 1,
                 'rating' => 1,
+                'comment' => 'không bao giờ có lần 2',
+            ],
+            [
+                'user_id' => 6,
+                'booking_id' => 9,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'car_id' => 20,
+                'rating' => 5,
                 'comment' => 'không bao giờ có lần 2',
             ],
         ]);

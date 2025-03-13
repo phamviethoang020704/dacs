@@ -1,700 +1,1065 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Rental</title>
-    {{-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon (1).ico') }}">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/99e557a6de.js" crossorigin="anonymous"></script>
+    <title>DriveLux</title>
     <style>
-        *{
-            padding: 0;
+*{
             margin: 0;
+            padding: 0;
             box-sizing: border-box;
             font-family: sans-serif;
-            position: relative;
-            scrollbar-width: thin;
-            scrollbar-color: #ff4d30 #fff;
         }
         #header{
             display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            width: 100%;
-            height: 412px;
-            position: relative;
-            background-image: url('{{ asset('storage/vehicels/heroes-bg.png') }}');
-        }
-        #header-overlay{
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 412px;
-            background-color: white;
-            opacity: 0.9;
-            z-index: 1;
-        }
-        #header-left{
-            display: flex;
-            justify-content: center;
-            z-index: 10;
-        }
-        #header-left h3{
-            /* color: #5937E0; */
-            padding-top: 5px;
-            padding-left: 5px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        #header-left ion-icon{
-            color:#FA4226;
-            font-size: 30px;
-            margin-right: 5px;
-
-        }
-        #header-menu li{
-            margin: 0 20px;
-            z-index: 99;
-            font-size: 20px;
-            list-style: none;
-            color: black;
-        }
-        #header-menu a{
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-        #header-menu a:hover{
-            color: #FA4226;
+            justify-content: space-around;
+            align-items: center;
+            padding-top: 20px;
+            background-color: #FAFAFA;
+            padding-top: 30px;
+            padding-bottom: 20px;
         }
         #header-menu{
             display: flex;
+            gap: 35px;
         }
-        #header-menu-main{
-            border-bottom: 3px solid #FF4D30;
-            padding-bottom: 3px;
+        #header-menu li{
+            list-style: none;
         }
-        #Login-Register{
-            z-index: 100;
+        #header-menu a:hover{
+            color: #2CB9AD !important;
         }
-        .register{
+        #header a{
+            color: #797D86;
+            font-weight: 400;
             text-decoration: none;
-            background: #FA4226;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            color: white;
-            font-size: 20px;
-            box-shadow: 0 0 15px #FA4226;
+            transition: all 0.5sease-in-out;
+            font-size: 19px;
         }
-        .register:hover{
-            background-color: #df2d12;
-            box-shadow: 0 0 15px #df2d12;
+        #header-menu-login{
+            display: flex;
+            gap: 35px;
         }
         .login{
-            text-decoration: none;
-            color: black;
-            font-size: 20px;
+            color: #FAFAFA !important;
+            transition: all 0.5s ease-in-out;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 50px;
+            background-color: #2C2D2F;
         }
-        .login:hover{
-            color: #FA4226;
+        .login:hover {
+            transform: scale(1.025);
+            outline: 2px solid #57d3c9;
+            box-shadow: 4px 5px 17px -4px #2CB9AD;
+            background-color: #2CB9AD;
         }
-        #account{
-            background: #FA4226;
-            font-size: 20px;
-            text-decoration: none;
-            color: white;
-            border-radius: 10px;
-            padding: 5px;
-            margin-left: 30px;
+        #menu-main{
+            color: #2CB9AD !important;
         }
-        #header-content{
-            position: absolute;
-            top: 150px;
-            left: 70px;
-            z-index: 3;
-            height: auto;
+
+        #inner-banner{
+            width: 100%;
+            padding-left: 40px;
+            display: flex;
+            align-items: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: left;
+            height: 290px;
+            background-image: url('{{ asset('storage/rentalCar/inner-banner.png') }}');
         }
-        #header-content a{
-            text-decoration: none;
-            color: black;
-            cursor: pointer;
-            width: 50px;
-            height: 30px;
-            border: 1px solod black;
+        #inner-banner h3{
+            font-weight: 900;
+            font-size: 70px;
+            line-height: 120%;
+            color: #FAFAFA;
+            margin: 0;
         }
-        #menu-icon-responsive{
-            display: none;
-            font-size: 30px;
-            color: #df2d12;
-            cursor: pointer;
+        #session{
+            display: flex;
+            gap: 20px;
+            margin-top: 100px;
         }
-        #header-menu-responsive{
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease;
+        #session-img{
+            flex-basis: 50%;
+            margin-left: 120px;
+            height: 900px;
+            background-color: #F0F2F4;
+            border-radius: 30px;
+            padding: 30px;
+        }
+        #session-content{
+            flex-basis: 50%;
+            margin-right: 100px;
+
+        }
+        #session-img img{
             width: 100%;
             height: 100%;
-            z-index: 1000;
-            position: fixed;
-            top: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.5);
         }
-        #header-menu-responsive-2{
-            padding-top: 30px;
-            padding-left: 20px;
-            top: 0;
-            right: -100%;
-            background-color: white;
-            z-index: 1001;
-            height: 100%;
-            width: 40%;
-            position: fixed;
-            transition: right 0.3s ease;
+        .whoweare, .whatwedo {
+            padding-bottom: 8px;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 120%;
+            margin-bottom: 10px;
+            padding-left: 11px;
+            position: relative;
+            cursor: pointer;
+            color: #797D86;
         }
-        #header-menu-responsive-2 li{
-            list-style: none;
-            margin:10px;
+        .whoweare{
+            margin-bottom: 50px;
+            margin-top: 15px;
         }
-        #header-menu-responsive-2 li>a{
-            text-decoration: none;
-            color: black;
+        .whatwedo{
+            border-bottom: 1px solid black;
+        }
+
+        .whoweare.active, .whatwedo.active {
+            color: #2CB9AD;
+        }
+
+        .whoweare::after, .whatwedo::after {
+            content: "";
+            width: 0px;
+            height: 2px;
+            background-color: #2CB9AD;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .whoweare.active::after, .whatwedo.active::after {
+            width: 250px;
+        }
+
+        /* Thêm hiệu ứng hover */
+        .whoweare:hover::after, .whatwedo:hover::after {
+            width: 250px;
+        }
+        .whoweare:hover, .whatwedo:hover {
+            color: #2CB9AD;
+        }
+
+        /* Ẩn nội dung ban đầu */
+        .content {
+            margin-top: 30px;
+            font-weight: 400;
             font-size: 20px;
+            line-height: 160%;
+            letter-spacing: 0.05em;
+            color: #2C2D2F;
         }
-        #header-menu-responsive-2 li>a:hover{
-            color: #FA4226;
+        .content.active {
+            display: block;
         }
-        #header-menu-responsive-2 ul{
+        #why-choose-us-2{
             display: flex;
-            flex-direction: column;
-        }
-        #Login-Register-responsive{
-            display: flex;
-            flex-direction: column;
             flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 50px;
+            margin-bottom: 200px;
         }
-        .login-responsive{
-            background-color: black;
-            color: white;
-            padding: 15px 50px;
-            border-radius: 10px;
-            width: 80%;
-            position: absolute;
-            top: 95px;
-            left: 50%;
-            transform: translate(-60%, -50%);
-            text-decoration: none;
+        #why-choose-us-2>div{
+            flex: 0 1 calc((100% - 40px) / 2);
+            background-color: #F0F2F4;
+            height: 170px;
+            padding: 30px;
+            border-radius: 40px;
+        }
+        #why-choose-us-2>div>div{
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
             display: flex;
-            align-items: center;
             justify-content: center;
-        }
-        .register-responsive{
-            background-color: #FF4D30;
-            color: white;
-            padding: 15px 50px;
-            border-radius: 10px;
-            width: 80%;
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translate(-60%, -50%);
-            text-decoration: none;
-            display: flex;
             align-items: center;
-            justify-content: center;
+            margin-bottom: 15px;
         }
-        #header-content{
-            position: absolute;
-            top: 150px;
-            left: 60px;
-            z-index: 10;
-        }
-        #header-content h1{
-            font-size: 40px;
-        }
-        #header-content h2{
+        #why-choose-us-2 h4{
+            font-weight: 600;
             font-size: 20px;
-            margin-top: 10px;
-            font-weight: bold;
+            line-height: 120%;
+            color: #2C2D2F;
+            margin: 0;
         }
-        #header-content a{
-            text-decoration: none;
-            color: black;
+
+
+
+        #how-to-book{
+            margin-top: 100px;
+            display: flex;
+            margin: auto;
+            gap: 50px;
+            align-items: center;
+            margin-left: 100px;
+        }
+        #how-to-book h2{
+            font-weight: 700;
+            font-size: 57px;
+            line-height: 120%;
+            color: #1B1C1E;
+        }
+        #how-to-book p{
+            color: #1B1C1E;
+            font-size: 20px;
+            width: 35%;
+            margin-bottom: 10px;
+            line-height: 160%;
+        }
+        #how-to-book>div>div{
+            margin-top: 10px;
+            width: 300px;
+            height: 10px;
+            background-color: #2AB8B8;
+            clip-path: polygon(0% 0%, 95% 0%, 100% 50%, 95% 100%, 0% 100%);
+        }
+
+
+
+        #logo-div{
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        #logo{
+            width: 750px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        #logo-item{
+            width: fit-content;
+            display: flex;
+            gap: 10px;
+            animation: slide 20s linear infinite;
+        }
+        .logo-items{
+            width:150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+        }
+        .logo-items img{
+            width: 90%;
+            height: 90%;
+            border-radius: 15px;
+            box-shadow: 0 0 15px #2CB9AD;
+        }
+        @keyframes slide {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+        #slider-container-center{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 100px;
+        }
+        .slider-container {
+            width: 1200px; /* Hiển thị 3 div mỗi div rộng 100px */
+            overflow: hidden;
+            position: relative;
+        }
+        .slider {
+            display: flex;
+            width: 4800px; /* 6 div * 400px * 2 (clone để tạo hiệu ứng lặp vô hạn) */
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            width: 400px;
+            height: auto;
+            background: #F0F2F4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+        }
+        #prev-next{
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0px 0 80px;
+            margin-top: 100px;
+        }
+        #prev-next-btn{
+            display: flex;
+            gap: 30px;
+        }
+        #prev-next-btn button{
+            background-color: #F0F2F4;
+            color:#2CB9AD;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 15px;
+            font-size: 35px;
             cursor: pointer;
         }
-        #header-content a:hover{
-            color: #FA4226;
+        #prev-next-text{
+            display: flex;
         }
-        #about-company{
+        #prev-next-text p{
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 160%;
+            letter-spacing: 0.05em;
+            color: #1B1C1E;
+            padding: 0 30px;
+            text-align: end;
+            width: 60%;
+        }
+        #prev-next-text h2{
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 120%;
+            color: rgb(27, 28, 30);
+            margin-bottom: 24px;
+        }
+        #prev-next-text>div{
+            position: relative;
+        }
+        #prev-next-text>div>div{
+            bottom: 10px;
+            position: absolute;
+            width: 280px; /* Độ dài */
+            height: 10px; /* Độ dày */
+            background-color: #27B3AC; /* Màu xanh */
+            clip-path: polygon(0% 50%, 5% 0%, 100% 0%, 100% 100%, 5% 100%);
+        }
+
+        .slide img{
+            width: 100%;
+            height: 200px;
+            border-radius: 20px;
+        }
+        .slide{
+            border-radius: 20px;
+            padding: 20px;
+        }
+        .slide-car-info-div{
+            border-radius: 20px;
+            background-color: white;
+            margin-top: 20px;
+            width: 100%;
+            padding: 20px;
+        }
+        .slide-car-info{
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            align-items: center;
+        }
+        .slide-car-info h1{
+            font-weight: 200;
+            font-size: 15px;
+        }
+        .slide-car-info p{
+            font-size: 15px;
+        }
+        .slide-car-info>p>span{
+            color: #2CB9AD;
+        }
+        .slide a{
+            color: #FAFAFA !important;
+            transition: all 0.5s ease-in-out;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 50px;
+            background-color: #2C2D2F;
+            text-decoration: none;
+            margin: auto;
+        }
+        .slide a:hover{
+            transform: scale(1.025);
+            outline: 2px solid #57d3c9;
+            box-shadow: 4px 5px 17px -4px #2CB9AD;
+            background-color: #2CB9AD;
+        }
+        #slide-a{
+            margin-top: 20px;
             display: flex;
             justify-content: center;
-            gap: 30px;
-            /* gap: 10px; */
+        }
+
+
+        #customer-reviews{
             margin-top: 100px;
-            margin: 100px auto;
+            display: flex;
+            margin: auto;
+            gap: 20px;
+            margin-left: 100px;
+            flex-direction: column;
         }
-        #about-company-right{
-            flex-basis: 31%;
+        #customer-reviews h2{
+            font-weight: 700;
+            font-size: 37px;
+            line-height: 120%;
+            color: #1B1C1E;
         }
-        #about-company>img{
-            width: 30%;
+        #customer-reviews p{
+            color: #1B1C1E;
+            font-size: 17px;
+            width: 28%;
+            margin-bottom: 10px;
+            line-height: 160%;
+            text-align: end;
+            font-weight: 500;
+        }
+        #customer-reviews>div>div{
+            margin-top: 10px;
+            width: 300px;
+            height: 10px;
+            background-color: #2AB8B8;
+            clip-path: polygon(0% 0%, 95% 0%, 100% 50%, 95% 100%, 0% 100%);
+        }
+
+
+        #cr-container{
+            margin-left: 100px;
+            display: flex;
+            margin-bottom: 10px;
+            user-select: none;
+        }
+        .cr-slider-container {
+            width: 540px; /* Hiển thị 3 div mỗi div rộng 180px */
+            overflow: hidden;
+            position: relative;
+        }
+        .cr-slider {
+            display: flex;
+            width: 2160px; /* 6 div * 180px * 2 (clone để tạo hiệu ứng lặp vô hạn) */
+            transition: transform 0.5s ease-in-out;
+        }
+        .cr-slide {
+            width: 180px;
             height: auto;
+            background: #F0F2F4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
         }
-        #about-company-right h2{
+
+        .cr-slide img{
+            width: 100%;
+            height: 120px;
+            border-radius: 10px;
+        }
+        .cr-slide{
+            border-radius: 10px;
+        }
+        #main-content-container{
+            display: flex;
+            padding: 0 100px;
+            align-items: center;
+        }
+        #img-container{
+            width: 1000px;
+            height: 550px;
+            border-radius: 25px;
+        }
+        #img-container img{
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+        }
+        #div-container{
+            background-color: #F0F2F4;
+            height: 400px;
+            width: 1000px;
+            display: flex;
+            align-items: center;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            padding: 20px 30px;
+        }
+        #div-container div{
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
+            height: 100%;
+        }
+        #main-content-container h5{
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 160%;
+            letter-spacing: 0.05em;
+            color: #1B1C1E;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+        #div-container h3{
+            font-weight: 800;
+            font-size: 24px;
+            line-height: 120%;
+            color: #1B1C1E;
+        }
+        #div-container p{
+            color:#2CB9AD;
             font-size: 25px;
         }
-        #about-company-right>h1{
-            font-size: 40px;
-            line-height: 40px;
-            margin: 15px 0;
-        }
-        #about-company-right p{
-            color:#706f7b;
-            margin-bottom: 30px;
-        }
-        #about-company-icon{
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-        }
-        .about-company-icon{
-            flex-basis: 33%;
-        }
-        .about-company-icon div{
-            display: flex;
-            align-items: center;
-        }
-        .about-company-icon div p{
-            margin-top: 20px;
-            width: 72px;
-            padding-left: 5px;
-            font-size: 15px;
-        }
-        .about-company-icon div h1{
-            font-size: 40px;
-        }
-        #car-features{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 250px;
-            }
-            #car-features h1{
-                font-size: 20px;
-            }
-            #car-features h2{
-                font-size: 50px;
-            }
-            #car-features-2{
-                display: flex;
-                padding: 20px;
-                flex-wrap: wrap;
-            }
-            .car-features{
-                flex-basis: 33%;
-                text-align: center;
-                padding: 20px;
-            }
-            .car-features ion-icon{
-                font-size: 50px;
-                color: #FA4226;
-            }
-            .car-features h1{
-                margin: 20px 0;
-            }
-            .car-features p{
-                padding: 0 82px;
-                color: #888888;
-                font-size: 15px;
-            }
-
-
-            #book-a-car{
-            background-color: #282828;
-            width: 100%;
-            height: auto;
-            line-height: 130px;
-            text-align: center;
-            margin-top: 60px;
-            display: flex;
-            align-items: center;
-            padding-left: 20px;
-        }
-        #book-a-car-text{
-            color: white;
-            font-size: 2.5vw;
-        }
-        #phone-number-1{
-            color: #FF4D30;
-            margin-left: 20px;
-            /* font-style: 3vw; */
-        }
-        #phone-number-1 ion-icon{
-            /* font-style: 5px; */
-        }
-
-        #phone-number{
-        position: relative;
-    }
-    #tooltip {
-        position: absolute; /* Đặt vị trí cố định */
-        width: 140px;
-        bottom: 70%;
-        font-size: 14px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #FA4226;
-        color: white;
-        display: flex;
-        text-align: center;
-        justify-content: center;
-        line-height: 30px;
-        opacity: 0;
-        transition: opacity 0.3s ease;    }
-    #tooltip-arrow{
-        position: absolute;
-        top: 100%; /* Đặt mũi tên ở dưới */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-top: 6px solid #FA4226; /* Màu của tooltip */
-    }
-
-
         #footer{
-            display: flex;
-            margin-top: 70px;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            width: 100%;
+            height: 486px;
+            position: relative;
         }
-        #footer-1,#footer-2,#footer-3,#footer-4{
-            flex-basis: 20%;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        #footer a{
-            text-decoration: none;
-            color: black;
-        }
-        #footer li{
-            list-style: none;
-        }
-        #footer-1 p{
-            color: #888888;
-            line-height: 25px;
-            margin:15px 0;
-            font-size: 15px;
-        }
-        #footer-1 h4{
-            font-size: 15px;
-        }
-        #footer-1 h3{
-            margin: 15px 0;
-            font-size: 15px;
-        }
-        #footer-2 li{
-            margin: 20px 0;
-            font-size: 15px;
-        }
-        #footer-2 a:hover{
-            color: #FF4D30;
-        }
-        #footer-2 ul{
-            margin: 0;padding: 0;
-            list-style: none;
-        }
-        #footer-3 p{
-            margin: 20px 0;
-            font-size: 15px;
-        }
-        #footer-4{
+        #footer-left{
+            row-gap: 10px;
+            padding-top: 100px;
+            padding-left: 150px;
             display: flex;
             flex-direction: column;
+            background-image: url('{{ asset('storage/home/footer-shape.png') }}');
+            width: 490px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: right;
+            height: 486px;
+
         }
-        #footer-4 p{
+        #footer-left>p{
             font-size: 20px;
-            margin: 20px 0;
+            margin-right: 10px;
         }
-        #footer-4 input{
-            padding: 15px 40px;
-            background-color:#ECECEC;
-            border: none;
-            outline: none;
-            font-size: 15px;
-        }
-        #footer-4 button{
+        .footer-icon{
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
             cursor: pointer;
-            background-color:#FF4D30;
-            border:none;
-            margin-top: 10px;
-            line-height: 30px;
-            padding: 7px 15px;
-            color: white;
-            font-size: 15px;
+            color: #FAFAFA;
+            transition: color 1s ease;
         }
-
+        .footer-icon:hover{
+            color: #1B1C1E;
+        }
+        .footer-icon i{
+            font-weight: 100;
+            font-size: 25px;
+        }
+        #footer-left>p{
+            font-size: 15px;
+            margin: 15px 0;
+        }
+        #footer-logo{
+            display: flex;
+            gap: 30px;
+        }
+        #footer-logo i{
+            color: #FAFAFA;
+            font-size: 30px;
+            transition: color 1s ease-in-out;
+            cursor: pointer;
+        }
+        #footer-logo i:hover{
+            color: #1B1C1E;
+        }
+        #footer h4{
+            font-size: 20px;
+            color: #FAFAFA;
+            margin-top: 10px;
+        }
+        #footer h5{
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        #footer-logo-car{
+            position: absolute;
+            top: 100px;
+            left: 40%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: auto;
+        }
+        #footer-logo-car img, #footer-car img{
+            width: 100%;
+            height: auto;
+        }
+        #footer-car{
+            position: absolute;
+            right: 150px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+        }
         #scrollToTop{
-                display: none;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background-color: #FA4226;
-                color: white;
-                position: fixed;
-                bottom: 30px;
-                right: 30px;
-                z-index: 9999;
-                border: none;
-                cursor: pointer;
-            }
-            #scrollToTop:hover{
-                background-color: #df2d12;
-            }
-
-
-            @media screen and (max-width: 1200px){
-                #header-menu{
-                    display: none;
-                }
-                #Login-Register{
-                    display: none;
-                }
-                .register{
-                    margin-top: 10px;
-                }
-                .car-features{
-                    flex-basis: 50%;
-                }
-                #footer-1,#footer-2,#footer-3,#footer-4{
-                    flex-basis: 50%;
-                }
-                #menu-icon-responsive{
-                    display: block;
-                    z-index: 1000;
-                }
-            }
-            @media screen and (max-width: 992px){
-                .car-features{
-                    flex-basis: 100%;
-                }
-
-            }
-            @media screen and (max-width: 768px){
-                #footer-1,#footer-2,#footer-3,#footer-4{
-                    flex-basis: 100%;
-                }
-                #menu-responsive{
-                    display: block;
-                }
-                .menu{
-                    display: none;
-                }
-                #about-company>img,#about-company-right{
-                    flex-basis: 100%;
-                    padding: 40px;
-                }
-                #about-company{
-                    flex-wrap: wrap;
-                }
-            }
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #3ECCC0;
+            color: black;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1003;
+            font-size: 25px;
+            border: none;
+            cursor: pointer;
+        }
+        #scrollToTop:hover{
+            background-color: #06c6b6;
+        }
     </style>
 </head>
 <body>
-    <div id="header">
-        <div id="header-overlay"></div>
-        <div id="header-left" onclick="window.location.href='http://127.0.0.1:8000/';" style="cursor: pointer">
-            <ion-icon name="car-sport"></ion-icon>
-            <h3>Car Rental</h3>
-        </div>
-        <ul id="header-menu">
-            <li><a href="/">Trang chủ</a></li>
-            <li><a href="/car">Phương tiện</a></li>
-            <li><a href="/feedback">Phản hồi</a></li>
-            <li><a href="/about" id="header-menu-main">Giới thiệu</a></li>
-            <li><a href="/contact">Liên hệ</a></li>
-        </ul>
-        <div id="Login-Register">
-            @if (Route::has('login'))
-                <div>
-                    @auth
-                        @if (Auth::user()->role === 'admin')
-                            <a id="account" href="{{ url('/admin') }}">Trang quản trị</a>
+<div id="header">
+        <img src="{{ asset('storage/home/logo.png') }}" alt="Logo">
+        <div id="header-menu-login">
+            <div id="header-menu">
+                <li><a href="/">Trang chủ</a></li>
+                <li><a href="/car">Thuê xe</a></li>
+                <li><a href="/about" id="menu-main">Về chúng tôi</a></li>
+                <li><a href="/contact">Liên hệ</a></li>
+            </div>
+            <div id="Login">
+                @if (Route::has('login'))
+                    <div>
+                        @auth
+                            @if (Auth::user()->role === 'admin')
+                                <a id="account" href="{{ url('/admin') }}">Trang quản trị</a>
+                            @else
+                                <a id="account" href="{{ url('/dashboard') }}">Tài khoản</a>
+                            @endif
                         @else
-                            <a id="account" href="{{ url('/dashboard') }}">Tài khoản</a>
-                        @endif
-                    @else
-                        <a class="login" href="{{ route('login') }}">Đăng nhập</a>
-
-                        @if (Route::has('register'))
-                            <a class="register" href="{{ route('login') }}">Đăng ký</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                                <a class="login" href="{{ route('login') }}">Đăng nhập</a>
+                        @endauth
+                    </div>
+                @endif
+            </div>
         </div>
-        <ion-icon id="menu-icon-responsive" name="grid-outline"></ion-icon>
-
     </div>
-    <div id="header-content">
-        <h1>Giới thiệu</h1>
-        <h2><a href="/">Trang chủ</a> / Giới thiệu</h2>
+    <div id="inner-banner">
+        <h3>Về chúng tôi</h3>
     </div>
-    <div id="header-menu-responsive"></div>
-    <div id="header-menu-responsive-2">
-    <ul>
-        <li><a href="/">Trang chủ</a></li>
-        <li><a href="/car">Phương tiện</a></li>
-        <li><a href="/feedback">Phản hồi</a></li>
-        <li><a href="/about">Giới thiệu</a></li>
-        <li><a href="/contact">Liên hệ</a></li>
-    </ul>
-    <div id="Login-Register-responsive">
-        @if (Route::has('login'))
+    <div id="session">
+        <div id="session-img">
+            <img src="{{ asset('storage/about/about-1.png') }}" alt="Logo">
+        </div>
+        <div id="session-content">
+            <h3 id="whoweare" class="whoweare active">Chúng tôi là ai</h3>
+            <h3 id="whatwedo" class="whatwedo">Chúng tôi làm gì</h3>
             <div>
-                @auth
-                    @if (Auth::user()->role === 'admin')
-                        <a id="account" href="{{ url('/admin') }}">Trang quản trị</a>
-                    @else
-                        <a id="account" href="{{ url('/dashboard') }}">Tài khoản</a>
-                    @endif
-                @else
-                    <a class="login-responsive" href="{{ route('login') }}">Đăng nhập</a>
-
-                    @if (Route::has('register'))
-                        <a class="register-responsive" href="{{ route('login') }}">Đăng ký</a>
-                    @endif
-                @endauth
+                <p class="content first">Tại DriveLux, chúng tôi không chỉ là một công ty cho thuê xe sang trọng chúng tôi là những người đam mê nhiệt huyết tin vào sức mạnh biến đổi của những chiếc ô tô đặc biệt. Với cam kết không ngừng mang đến những trải nghiệm khó quên, chúng tôi nỗ lực cung cấp cho khách hàng nhiều hơn một chiếc xe; chúng tôi mở ra cánh cổng đến với thế giới xa xỉ, phong cách và sự khéo léo vô song.</p>
+                <p class="content second" style="display: none;">Phương pháp tiếp cận toàn diện của chúng tôi đối với kế hoạch tài chính bao gồm quản lý đầu tư, lập kế hoạch nghỉ hưu, lập kế hoạch thuế, lập kế hoạch bất động sản, quản lý rủi ro, lập kế hoạch giáo dục, lập kế hoạch kinh doanh và từ thiện. Liên hệ với chúng tôi ngay hôm nay để lên lịch tư vấn và bắt đầu con đường hướng tới thành công về tài chính. Sức mạnh chuyển đổi của những chiếc ô tô đặc biệt</p>
             </div>
-        @endif
-    </div>
-    </div>
-    <div id="about-company">
-        <img src="{{ asset('storage/about/about-main.jpg') }}" alt="about-company">
-        <div id="about-company-right">
-            <h2>Giới thiệu về công ty chúng tôi</h2>
-            <h1>Bạn khởi động động cơ và cuộc phiêu lưu của bạn bắt đầu</h1>
-            <p>Chào mừng đến với Car Rental, chúng tôi tự hào là đơn vị chuyên cung cấp dịch vụ cho thuê xe uy tín và chất lượng. Với đội ngũ xe đa dạng từ các thương hiệu hàng đầu, chúng tôi cam kết mang đến cho khách hàng những trải nghiệm di chuyển an toàn, tiện nghi và tiết kiệm chi phí. Hãy đồng hành cùng Car Rental để chuyến đi của bạn thêm trọn vẹn!</p>
-            <div id="about-company-icon">
-                <div class="about-company-icon">
-                    <img src="{{ asset('storage/about/icon1.png') }}" alt="icon1">
-                    <div>
-                        <h1>60</h1>
-                        <p>Các loại xe</p>
-                    </div>
+            <div id="why-choose-us-2">
+                <div>
+                    <div><img src="{{ asset('storage/home/home-chooseUs/sports-car-icon.png') }}" alt="hero-bg"></div>
+                    <h4>Nhiều hãng xe sang trọng</h4>
                 </div>
-                <div class="about-company-icon">
-                    <img src="{{ asset('storage/about/icon2.png') }}" alt="icon2">
-                    <div>
-                        <h1>85</h1>
-                        <p>Cửa hàng cho thuê</p>
-                    </div>
+                <div>
+                    <div><img src="{{ asset('storage/home/home-chooseUs/vacuum-icon.png') }}" alt="hero-bg"></div>
+                    <h4>Bảo dưỡng tốt và sạch sẽ</h4>
                 </div>
-                <div class="about-company-icon">
-                    <img src="{{ asset('storage/about/icon3.png') }}" alt="icon3">
-                    <div>
-                        <h1>75</h1>
-                        <p>Cửa hàng sửa chữa</p>
-                    </div>
+                <div>
+                    <div><img src="{{ asset('storage/home/home-chooseUs/booking-icon.png') }}" alt="hero-bg"></div>
+                    <h4>Đặt xe dễ dàng</h4>
+                </div>
+                <div>
+                    <div><img src="{{ asset('storage/home/home-chooseUs/service-icon.png') }}" alt="hero-bg"></div>
+                    <h4>Nhân viên tư vấn nhiệt tình</h4>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="car-features">
-        <h1>Lên kế hoạch cho chuyến đi của bạn</h1>
-        <h2>Thuê xe nhanh chóng & dễ dàng</h2>
+    <div id="how-to-book">
+        <div>
+            <h2>Đối tác của chúng tôi</h2>
+            <div></div>
+        </div>
+        <p>Liên minh mạnh mẽ, xây dựng quan hệ đối tác mạnh mẽ cho những trải nghiệm khó quên</p>
     </div>
-    <div id="car-features-2">
-        <div class="car-features">
-            <ion-icon name="navigate-outline"></ion-icon>
-            <h1>Sẵn sàng</h1>
-            <p>Sẵn sàng với nhiều lựa chọn phù hợp với nhu cầu của bạn.</p>
-        </div>
-        <div class="car-features">
-            <ion-icon name="car-sport-outline"></ion-icon>
-            <h1>Trải nghiệm tốt</h1>
-            <p>đảm bảo sự thoải mái với không gian rộng rãi và tiện nghi hiện đại.</p>
-        </div>
-        <div class="car-features">
-            <ion-icon name="bookmark-outline"></ion-icon>
-            <h1>Giá cả hợp lý</h1>
-            <p>cung cấp dịch vụ cho thuê xe với giá cả hợp lý và nhiều ưu đãi.</p>
+
+    <div id="logo-div">
+        <div id="logo">
+            <div id="logo-item">
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/bentley-logo.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/bmw-logo.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logoaudi.webp') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logojaguar.jpg') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logolanrover.webp') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logolexus.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logomer.jpg') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logorr.jpg') }}" alt="logo-item"></div>
+
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/bentley-logo.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/bmw-logo.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logoaudi.webp') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logojaguar.jpg') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logolanrover.webp') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logolexus.png') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logomer.jpg') }}" alt="logo-item"></div>
+                <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logorr.jpg') }}" alt="logo-item"></div>
+            </div>
         </div>
     </div>
 
-    <div id="book-a-car">
-        <h1 id="book-a-car-text">Bạn muốn thuê xe? liên hệ với chúng tôi ngay bây giờ</h1>
-        <div id="phone-number">
-            <span id="phone-number-1" style="cursor: pointer;font-size:3vw;">
-                0123 567 789
-                <ion-icon name="copy-outline" style="font-size: 1.5vw"></ion-icon>
-            </span>
-            <div id="tooltip">
-                Sao chép thành công!
-                <div id="tooltip-arrow"></div>
+
+    <div id="prev-next">
+        <div id="prev-next-btn">
+            <button class="btn prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="btn next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+        <div id="prev-next-text">
+            <p>Lựa chọn cẩn thận, những gì tốt nhất cho một chuyến đi khó quên</p>
+            <div>
+                <h2>the most beautiful</h2>
+                <div></div>
             </div>
+        </div>
+    </div>
+    <div id="slider-container-center">
+        <div class="slider-container">
+            <div id="slider" class="slider">
+                @foreach ($cars as $car)
+                <div class="slide">
+                    <img src="{{ asset('storage/' . $car->image_url) }}" alt="{{ $car->name }}">
+                    <div class="slide-car-info-div">
+                        <div class="slide-car-info">
+                            <h1>Thương hiệu</h1>
+                            <p id="trademark">{{$car->trademark}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Tên xe</h1>
+                            <p id="name">{{$car->name}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Giá thuê</h1>
+                            <p><span>{{ number_format($car->price_per_day, 0, ',', '.') }} VND/Ngay</span></p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Số chỗ ngồi</h1>
+                            <p>{{$car->seat_count}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Số lượng</h1>
+                            <p>{{$car->remaining_quantity}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Đánh giá</h1>
+                            <p><span>{{ $car->reviews->avg('rating') ?: 5 }}&#9733;</span></p>
+                        </div>
+                        <div id="slide-a">
+                            <a href="/car/show/{{$car->id}}">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                @foreach ($cars as $car)
+                <div class="slide">
+                    <img src="{{ asset('storage/' . $car->image_url) }}" alt="{{ $car->name }}">
+                    <div class="slide-car-info-div">
+                        <div class="slide-car-info">
+                            <h1>Thương hiệu</h1>
+                            <p id="trademark">{{$car->trademark}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Tên xe</h1>
+                            <p id="name">{{$car->name}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Giá thuê</h1>
+                            <p><span>{{ number_format($car->price_per_day, 0, ',', '.') }} VND/Ngay</span></p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Số chỗ ngồi</h1>
+                            <p>{{$car->seat_count}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Số lượng</h1>
+                            <p>{{$car->remaining_quantity}}</p>
+                        </div>
+                        <div class="slide-car-info">
+                            <h1>Đánh giá</h1>
+                            <p><span>{{ $car->reviews->avg('rating') ?: 5 }}&#9733;</span></p>
+                        </div>
+                        <div id="slide-a">
+                            <a href="/car/show/{{$car->id}}">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+
+    <div id="customer-reviews">
+        <div>
+            <h2>Khách hàng đánh giá</h2>
+            <div></div>
+        </div>
+        <p>Cùng xem khách hàng của chúng tôi đã nói gì về trải nghiệm của họ tại DriveLux</p>
+    </div>
+
+    <div id="cr-container">
+        <div class="cr-slider-container">
+            <div id="cr-slider" class="cr-slider">
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-1.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-2.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-3.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-4.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-5.jpg') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-6.jpg') }}" alt="customer"></div>
+
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-1.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-2.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-3.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-4.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-5.jpg') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-6.jpg') }}" alt="customer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thẻ div chứa ảnh chính và nội dung -->
+    <div id="main-content-container">
+        <div id="div-container">
+            <div>
+                <h3 id="customername">Nguyen Van Long</h3>
+                <p>&starf;&starf;&starf;&starf;&starf;</p>
+                <h5 id="main-text">"Thuê xe từ DriveLux là một trải nghiệm thật sự rất tuyệt vời. Dịch vụ khách hàng tuyệt vời, & chiếc xe tôi chọn vượt xa mọi mong đợi. Xử lý mượt mà, nội thất sang trọng và chuyến đi khó quên. Tôi thực sự giới thiệu DriveLux cho bất kỳ ai đang tìm kiếm trải nghiệm thuê xe đáng chú ý"</h5>
+            </div>
+        </div>
+        <div id="img-container">
+            <img id="main-image" src="{{ asset('storage/home/cr/cr-2.png') }}" alt="">
         </div>
     </div>
     <div id="footer">
-        <div id="footer-1">
-            <h1>Thuê xe</h1>
-            <p>Chúng tôi cung cấp nhiều loại xe đáp ứng mọi nhu cầu lái xe của bạn. Chúng tôi có chiếc xe hoàn hảo để đáp ứng nhu cầu của bạn.</p>
-            <h2>0123-456-789</h2>
-            <h3>Hoang@gmail.com</h3>
-            <h4>Thiết kế: Pham Viet Hoang</h4>
+        <div id="footer-left">
+            <div class="footer-icon">
+                <i class='bx bx-phone'></i>
+                <p>02414123123</p>
+            </div>
+            <div class="footer-icon">
+                <i class='bx bx-envelope'></i>
+                <p>hoang@gmail.com</p>
+            </div>
+            <div class="footer-icon">
+                <i class='bx bx-map'></i>
+                <p>12 Yên Nghĩa, Hà Đông, Hà Nội</p>
+            </div>
+            <p>Monday - Friday: 08:00 AM - 06:00 PM</p>
+            <div id="footer-logo">
+                <i class='bx bxl-instagram'></i>
+                <i class='bx bxl-facebook'></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class='bx bx-envelope'></i>
+            </div>
+            <h4>© 2024 All rights are reserved by</h4>
+            <h5>Drivelux</h5>
         </div>
-        <div id="footer-2">
-            <h1>Công ty</h1>
-            <ul>
-                <li><a href="#">Phòng trưng bày</a></li>
-                <li><a href="#">Sự nghiệp</a></li>
-                <li><a href="#">Điện thoại di động</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Cách chúng tôi làm việc</a></li>
-            </ul>
+        <div id="footer-logo-car">
+            <img src="{{ asset('storage/home/logo.png') }}" alt="">
         </div>
-        <div id="footer-3">
-            <h1>Thời gian làm việc</h1>
-            <p>Thứ 2 - Thứ 6, từ 8 giờ sáng - 9 giờ tối</p>
-            <p>Thứ 7: 8 giờ sáng - 7 giờ tối</p>
-            <p>Chủ nhật: đóng cửa</p>
-        </div>
-        <div id="footer-4">
-            <h1>Đăng ký</h1>
-            <p>Đăng ký địa chỉ Email của bạn để nhận tin tức và cập nhật mới nhất.</p>
-            <input type="text" placeholder="Nhập địa chỉ email">
-            <button>Xác nhận</button>
+        <div id="footer-car">
+            <img src="{{ asset('storage/home/car-image-2.png') }}" alt="">
         </div>
     </div>
     <button id="scrollToTop">↑</button>
     <script>
-        const menuIconResponsive = document.getElementById("menu-icon-responsive")
-            const headerMenuResponsive = document.getElementById("header-menu-responsive")
-            const headerMenuResponsive2 = document.getElementById("header-menu-responsive-2")
-            menuIconResponsive.addEventListener("click",() => {
-                headerMenuResponsive.style.opacity = 1;
-                headerMenuResponsive.style.visibility = "visible";
-                menuIconResponsive.style.display = "none";
-                headerMenuResponsive2.style.right = 0;
-            })
-            headerMenuResponsive.addEventListener("click",() => {
-                headerMenuResponsive.style.opacity = 0;
-                menuIconResponsive.style.display = "block";
-                headerMenuResponsive2.style.right = -100 + "%";
-                headerMenuResponsive.style.visibility = "hidden";
-            })
+            document.addEventListener("DOMContentLoaded", function () {
+        let whoweare = document.getElementById("whoweare");
+        let whatwedo = document.getElementById("whatwedo");
 
-            //
-            const scrollToTop = document.getElementById("scrollToTop");
+        let firstContent = document.querySelector(".content.first");
+        let secondContent = document.querySelector(".content.second");
+
+        // Đặt trạng thái ban đầu
+        whoweare.classList.add("active");
+        firstContent.style.display = "block";
+        secondContent.style.display = "none";
+
+        // Sự kiện click vào What We Do
+        whatwedo.addEventListener("click", () => {
+            whatwedo.classList.add("active");
+            whoweare.classList.remove("active");
+
+            firstContent.style.display = "none";
+            secondContent.style.display = "block"; // Sửa thành "block" để hiển thị
+        });
+
+        // Sự kiện click vào Who We Are
+        whoweare.addEventListener("click", () => {
+            whoweare.classList.add("active");
+            whatwedo.classList.remove("active");
+
+            secondContent.style.display = "none";
+            firstContent.style.display = "block"; // Sửa thành "block" để hiển thị
+        });
+    });
+
+
+
+    //
+    let index = 0;
+        const totalSlides = 6;
+        const visibleSlides = 3;
+        const slider = document.getElementById('slider');
+        let autoSlide = setInterval(() => moveSlide(1), 5000);
+        let isDragging = false;
+        let startX;
+
+        function moveSlide(direction) {
+            index += direction;
+            if (index > totalSlides) {
+                index = 1;
+                slider.style.transition = 'none';
+                slider.style.transform = `translateX(0px)`;
+                setTimeout(() => {
+                    slider.style.transition = 'transform 0.5s ease-in-out';
+                    slider.style.transform = `translateX(${-index * 400}px)`;
+                }, 50);
+                return;
+            }
+            if (index < 0) {
+                index = totalSlides - 1;
+                slider.style.transition = 'none';
+                slider.style.transform = `translateX(${-totalSlides * 400}px)`;
+                setTimeout(() => {
+                    slider.style.transition = 'transform 0.5s ease-in-out';
+                    slider.style.transform = `translateX(${-index * 400}px)`;
+                }, 50);
+                return;
+            }
+            slider.style.transform = `translateX(${-index * 400}px)`;
+            resetAutoSlide();
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlide);
+            autoSlide = setInterval(() => moveSlide(1), 5000);
+        }
+
+        slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX;
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            let moveX = e.pageX - startX;
+            if (moveX > 50) {
+                moveSlide(-1);
+                isDragging = false;
+            }
+            if (moveX < -50) {
+                moveSlide(1);
+                isDragging = false;
+            }
+        });
+
+        slider.addEventListener('mouseup', () => isDragging = false);
+        slider.addEventListener('mouseleave', () => isDragging = false);
+
+
+
+        //
+        let index3 = 0;
+        const totalSlides3 = 6;
+        const visibleSlides3 = 3;
+        const slider3 = document.getElementById('cr-slider');
+        const mainImage = document.getElementById('main-image');
+        const mainText = document.getElementById('main-text');
+        let autoSlide3 = setInterval(() => moveSlide3(1), 5000);
+        let isDragging3 = false;
+        let startX3;
+        let customerName = document.getElementById('customername')
+
+        const names = {
+            "cr-1.png": 'Nguyen Van Nam',
+            "cr-2.png": 'Nguyen Van long',
+            "cr-3.png": 'phung Van anh',
+            "cr-4.png": 'Nguyen thi ha',
+            "cr-5.jpg": 'Nguyen Phuc luong',
+            "cr-6.jpg": 'Tran Van Mieu',
+        }
+        const captions = {
+            "cr-1.png": '"DriveLux mang đến một dịch vụ thuê xe đẳng cấp, từ quy trình đặt xe nhanh chóng đến sự tận tâm của đội ngũ hỗ trợ khách hàng. Chiếc xe tôi nhận được không chỉ sạch sẽ, bảo dưỡng tốt mà còn có đầy đủ tiện nghi hiện đại. Chuyến đi thật thoải mái và tuyệt vời!"',
+            "cr-2.png": '"Thuê xe từ DriveLux là một trải nghiệm thật sự rất tuyệt vời. Dịch vụ khách hàng tuyệt vời, & chiếc xe tôi chọn vượt xa mọi mong đợi. Xử lý mượt mà, nội thất sang trọng và chuyến đi khó quên. Tôi thực sự giới thiệu DriveLux cho bất kỳ ai đang tìm kiếm trải nghiệm thuê xe đáng chú ý"',
+            "cr-3.png": '"Chưa bao giờ tôi cảm thấy việc thuê xe lại dễ dàng và chuyên nghiệp đến vậy! DriveLux thực sự làm tốt từ việc cung cấp thông tin minh bạch, quy trình nhận/trả xe nhanh gọn đến những chiếc xe chất lượng cao. Dịch vụ xuất sắc, xe lái êm ái và trải nghiệm cực kỳ đáng nhớ!',
+            "cr-4.png": '"Tôi hoàn toàn hài lòng với dịch vụ của DriveLux! Nhân viên hỗ trợ tận tình, giúp tôi chọn được chiếc xe ưng ý, đúng với nhu cầu. Xe sạch sẽ, sang trọng, động cơ mạnh mẽ và chuyến đi thật sự suôn sẻ. Đây chắc chắn là lựa chọn hàng đầu của tôi mỗi khi cần thuê xe."',
+            "cr-5.jpg": '"DriveLux không chỉ mang đến những chiếc xe sang trọng mà còn tạo ra một trải nghiệm thuê xe hoàn hảo. Từ việc đặt xe online tiện lợi, giao nhận xe đúng giờ đến chất lượng xe tuyệt vời – tất cả đều rất chuyên nghiệp. Tôi cảm thấy mình đang sử dụng một dịch vụ đẳng cấp thực sự!"',
+            "cr-6.jpg": '"Dịch vụ thuê xe của DriveLux thực sự làm tôi ấn tượng! Xe có nhiều tùy chọn cao cấp, nội thất hiện đại và vận hành êm ái. Nhân viên hỗ trợ cực kỳ thân thiện, sẵn sàng giúp đỡ ngay khi cần. Đây chính là trải nghiệm thuê xe mà ai cũng nên thử một lần!"'
+        };
+
+        function moveSlide3(direction) {
+            index3 += direction;
+            if (index3 > totalSlides3) {
+                index3 = 1;
+                slider3.style.transition = 'none';
+                slider3.style.transform = `translateX(0px)`;
+                setTimeout(() => {
+                    slider3.style.transition = 'transform 0.5s ease-in-out';
+                    slider3.style.transform = `translateX(${-index3 * 180}px)`;
+                }, 50);
+            } else if (index3 < 0) {
+                index3 = totalSlides3 - 1;
+                slider3.style.transition = 'none';
+                slider3.style.transform = `translateX(${-totalSlides3 * 180}px)`;
+                setTimeout(() => {
+                    slider3.style.transition = 'transform 0.5s ease-in-out';
+                    slider3.style.transform = `translateX(${-index3 * 180}px)`;
+                }, 50);
+            } else {
+                slider3.style.transform = `translateX(${-index3 * 180}px)`;
+            }
+            updateMainContent();
+            resetAutoSlide3();
+        }
+
+        function resetAutoSlide3() {
+            clearInterval(autoSlide3);
+            autoSlide3 = setInterval(() => moveSlide3(1), 5000);
+        }
+
+        function updateMainContent() {
+            const slides3 = document.querySelectorAll('.cr-slide img');
+            const middleIndex = (index3 + 1) % totalSlides3; // Lấy ảnh giữa
+            let newSrc = slides3[middleIndex].src.split('/').pop(); // Lấy tên file ảnh
+            mainImage.src = slides3[middleIndex].src;
+            mainText.textContent = captions[newSrc] || "Hình ảnh đặc biệt, chưa có mô tả.";
+            customerName.textContent = names[newSrc];
+        }
+
+        slider3.addEventListener('mousedown', (e) => {
+            isDragging3 = true;
+            startX3 = e.pageX;
+        });
+
+        slider3.addEventListener('mousemove', (e) => {
+            if (!isDragging3) return;
+            let moveX3 = e.pageX - startX3;
+            if (moveX3 > 50) {
+                moveSlide3(-1);
+                isDragging3 = false;
+            }
+            if (moveX3 < -50) {
+                moveSlide3(1);
+                isDragging3 = false;
+            }
+        });
+
+        slider3.addEventListener('mouseup', () => isDragging3 = false);
+        slider3.addEventListener('mouseleave', () => isDragging3 = false);
+
+        //
+        const scrollToTop = document.getElementById("scrollToTop");
             window.onscroll = function(){
                 if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100){
                     scrollToTop.style.display = "block";
@@ -709,32 +1074,6 @@
                     behavior: "smooth",
                 })
             })
-
-            const carCartegory = document.getElementById("car-cartegory");
-            const menuResponsive = document.querySelector(".menu-responsive");
-
-
-//
-const phoneNumber1 = document.getElementById("phone-number-1");
-        const tooltip = document.getElementById("tooltip");
-
-        phoneNumber1.addEventListener("click", () => {
-        const textToCopy = phoneNumber1.textContent.trim();
-
-    // Sao chép số điện thoại
-        navigator.clipboard.writeText(textToCopy)
-        .then(() => {
-            tooltip.style.opacity = 1;
-            setTimeout(() => {
-                tooltip.style.opacity = 0;
-            }, 700);
-        })
-        .catch(err => {
-            console.error("Không thể sao chép: ", err);
-        });
-});
-
-
     </script>
 </body>
 </html>

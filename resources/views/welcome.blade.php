@@ -1,1130 +1,11 @@
-{{-- <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Car Rental</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-        <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon (1).ico') }}">
-        <style>
-            *{
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: sans-serif;
-                position: relative;
-                scrollbar-width: thin;
-                scrollbar-color: #ff4d30 #fff;
-                max-width: 100vw; /* Không vượt quá màn hình */
-            }
-            #header{
-                position: relative;
-                display: flex;
-                justify-content: space-between;
-                padding: 20px;
-                background-color: #F8F8F8;
-                height: 870px;
-                width: 100%;
-            }
-            #header-left{
-                display: flex;
-                justify-content: center;
-            }
-            #header-left h3{
-                /* color: #5937E0; */
-                padding-top: 5px;
-                padding-left: 5px;
-                font-size: 20px;
-            }
-            #header-left ion-icon{
-                color:#FA4226;
-                font-size: 30px;
-                margin-right: 5px;
-
-            }
-            #header-menu li{
-                margin: 0 20px;
-                z-index: 99;
-                font-size: 20px;
-                list-style: none;
-                color: black;
-            }
-            #header-menu a{
-                text-decoration: none;
-                color: black;
-                font-weight: bold;
-            }
-            #header-menu a:hover{
-                color: #FA4226;
-            }
-            #header-menu{
-                display: flex;
-            }
-            #header-image{
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
-            #main-car{
-                position: absolute;
-                top: 140px;
-                right: 0;
-                width: 650px;
-                height: 650px;
-            }
-            #main-car>img{
-                width: 100%;
-            }
-            #Login-Register{
-                z-index: 100;
-            }
-            .register{
-                text-decoration: none;
-                background: #FA4226;
-                margin: 10px;
-                padding: 10px;
-                border-radius: 10px;
-                color: white;
-                font-size: 20px;
-                box-shadow: 0 0 15px #FA4226;
-            }
-            .register:hover{
-                background-color: #df2d12;
-                box-shadow: 0 0 15px #df2d12;
-            }
-            .login{
-                text-decoration: none;
-                color: black;
-                font-size: 20px;
-            }
-            .login:hover{
-                color: #FA4226;
-            }
-            #account{
-                background: #FA4226;
-                font-size: 20px;
-                text-decoration: none;
-                color: white;
-                border-radius: 10px;
-                padding: 5px;
-            }
-            #hero-content{
-                position: absolute;
-                top: 170px;
-                left: 50px;
-            }
-            #hero-content p{
-                width: 400px;
-                margin: 30px 0 50px;
-                font-size: 15px;
-            }
-            #hero-content h2{
-                font-size: clamp(1.2rem, 4vw, 2rem);
-                margin: 10px 0;
-                width: 500px;
-            }
-            #hero-content h1{
-                /* font-size: 1.5vw; */
-                font-size: clamp(1.2rem, 4vw, 2rem);
-            }
-            #book-ride{
-                text-decoration: none;
-                color:white;
-                background-color: #FA4226;
-                padding: 15px;
-                margin: 20px 20px 20px 0;
-                font-size: 15px;
-                box-shadow: 0 0 15px #FA4226;
-            }
-            #book-ride:hover{
-                background-color: #df2d12;
-                box-shadow: 0 0 15px #df2d12;
-            }
-            #learn-more{
-                text-decoration: none;
-                color: white;
-                background-color: black;
-                padding: 15px;
-                font-size: 15px;
-            }
-            #learn-more:hover{
-                background-color: white;
-                color: black;
-                border: 1px solid black;
-            }
-            #home-menu-accordion{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: auto;
-            }
-            #home-menu-accordion h1{
-                font-size: 20px;
-                margin-top: 30px;
-            }
-            #home-menu-accordion h2{
-                font-size: 3vw;
-                margin: 10px 0 15px;
-            }
-            #home-menu-accordion p{
-                color: #888888;
-                width: 50%;
-                font-size: 15px;
-                text-align: center;
-            }
-            #home-menu-accordion-2{
-                height: 650px;
-                position: relative;
-            }
-            #accordion-car{
-                position: absolute;
-                left: 0;
-                top: 0;
-                z-index: 1;
-            }
-            #accordion-content{
-                z-index: 2;
-                width: 70%;
-                position: absolute;
-                left: 15%;
-                background-color: white;
-                box-shadow: 0 10px 15px 0 rgba(255,83,48,.35);
-                padding-bottom: 30px;
-            }
-            #accordion-header-1{
-                background-color: #FF4D30;
-                color: white;
-                transition: background-color 0.3s ease;
-                padding: 20px 30px;
-                cursor: pointer;
-                margin: 15px 0;
-                font-size: 20px;
-            }
-            #accordion-content-1{
-                font-size: 15px;
-                color: #888888;
-                max-height: 0px;
-                overflow: hidden;
-                transition: max-height 0.5s ease;
-                padding: 0px 40px;
-            }
-            #accordion-header-2,#accordion-header-3{
-                background-color: white;
-                color: black;
-                transition: background-color 0.3s ease;
-                padding: 20px 30px;
-                cursor: pointer;
-                margin: 15px 0;
-                font-size: 20px;
-            }
-            #accordion-content-2,#accordion-content-3{
-                font-size: 15px;
-                color: #888888;
-                transition: max-height 0.5s ease;
-                max-height: 0px;
-                overflow: hidden;
-                padding: 0 40px;
-            }
-            #car-features{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 250px;
-            }
-            #car-features h1{
-                font-size: 1.5vw;
-            }
-            #car-features h2{
-                font-size: 2.3vw;
-            }
-            #car-features-2{
-                display: flex;
-                padding: 20px;
-                flex-wrap: wrap;
-            }
-            .car-features{
-                flex-basis: 33%;
-                text-align: center;
-                padding: 20px;
-            }
-            .car-features ion-icon{
-                font-size: 50px;
-                color: #FA4226;
-            }
-            .car-features h1{
-                margin: 20px 0;
-            }
-            .car-features p{
-                padding: 0 82px;
-                color: #888888;
-                font-size: 1v;
-            }
-            #view-all{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 250px;
-                margin-top: 100px;
-            }
-            #view-all h1{
-                font-size: 1.8vw;
-            }
-            #view-all h2{
-                font-size: 2.2vw;
-                margin: 10px 0 20px;
-            }
-            #view-all p{
-                font-size: 15px;
-                color: #2D2D2D;
-            }
-            #view-all-2 h1{
-                margin-left: 40px;
-                width: 350px;
-                font-size: 30px;
-            }
-            #view-all-2 a{
-                text-decoration: none;
-                color: black;
-                padding-right: 40px;
-                font-size: 20px;
-            }
-            #view-all-2 a:hover{
-                color: #FA4226;
-            }
-            #view-all-2{
-                display: flex;
-                justify-content: space-between;
-            }
-            #car-home{
-                flex-wrap: wrap;
-                display: flex;
-                justify-content: space-between;
-                margin-top: 20px;
-                padding: 0 30px;
-            }
-            #car-home-content{
-                flex-basis: 30%;
-                width: 6vw;
-                background-color: #FAFAFA;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                height: 450px;
-                border-radius: 10px;
-                border: 1px solid #d3d3d3;
-                margin: 10px 0;
-            }
-            #car-home-content a{
-                text-decoration: none;
-                background-color: #FA4226;
-                padding: 3px 7px;
-                width: 140px;
-                height: 40px;
-                border-radius: 10px;
-                color: white;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 30px;
-            }
-            #car-home-content img{
-                width: 100%;
-                height: 250px;
-                justify-content: center;
-                margin-bottom: 30px;
-                border-radius: 10px;
-                object-fit: cover;
-            }
-            .car-home-content-1{
-                display: flex;
-                justify-content: space-between;
-                padding: 10px 20px;
-                width: 100%;
-            }
-            #trademark{
-                color: black;
-                font-size: 1.4vw;
-                /* font-size: 15px; */
-            }
-            #name{
-                /* font-size: 1.4vw; */
-                font-size: 15px;
-            }
-            .car-home-content-2 p{
-                color: #FA4226;
-                font-size: 15px;
-            }
-            .car-home-content-2 h1{
-                font-size: 15px;
-            }
-            #save-big{
-                width: 100%;
-                height: auto;
-                background-color:#2D2D2D;
-                margin-top: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 25px 0;
-            }
-            #save-big h1{
-                font-size: 3vw;
-                color: white;
-            }
-            #save-big p{
-                font-size: 2vw;
-                color: whitesmoke;
-            }
-            #car-home-2{
-                position: relative;
-                height: 550px;
-            }
-            #lexus-home{
-                position: absolute;
-                top: 88px;
-                left: -12px;
-                width: 60%;
-            }
-            #audi-home{
-                position: absolute;
-                top: 40px;
-                right: 100px;
-                width: 40%;
-            }
-            #why-choose-us{
-                display: flex;
-                flex-wrap: wrap;
-            }
-            #why-choose-us-2{
-                display: flex;
-                flex-direction: column;
-                flex-basis: 50%;
-                padding-right: 40px;
-            }
-            #why-choose-us-1{
-                flex-basis: 50%;
-                padding: 30px 80px;
-            }
-            .why-choose-us-2{
-                display: flex;
-                padding: 30px;
-            }
-            #why-choose-us-1 h1{
-                font-size: 50px;
-                margin-top: 30px;
-            }
-            #why-choose-us-1 p{
-                color: #888888;
-                margin-top: 20px;
-            }
-            .why-choose-us-2 img{
-                margin-right: 20px;
-                font-size: 15px;
-            }
-            .why-choose-us-2 p{
-                margin-top: 10px;
-                color: #888888;
-                font-size: 15px;
-            }
-            #reviewed-by-people{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background-color:#F8F8F8;
-                padding: 50px 0;
-            }
-            #reviewed-by-people p{
-                width: 50%;
-                text-align: center;
-                color: #888888;
-                font-size: 15px;
-            }
-            #reviewed-by-people h2{
-                margin: 15px 0 20px;
-                font-size: 40px;
-            }
-            #review-by-people-2{
-                display: flex;
-                flex-wrap: wrap;
-                padding: 0 100px 50px;
-                background-color: #F8F8F8;
-                height: auto;
-                justify-content: space-between;
-
-            }
-            .review-by-people-2{
-                flex-basis: 45%;
-                display: flex;
-                flex-direction: column;
-                height: auto;
-                padding: 30px;
-                background-color: white;
-                width: 40%;
-                box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
-            }
-            .review-by-people-2 img{
-                width: 90px;
-                height: 90px;
-                margin-right: 10px;
-                border-radius: 50%;
-            }
-            .review-by-people-2 div{
-                display: flex;
-                align-items: center;
-            }
-            .review-by-people-2 p{
-                width: 90%;
-                margin-bottom: 10px;
-                font-size: 1.5vw;
-            }
-            .review-by-people-2 h1{
-                font-size: 1.5vw;
-            }
-            #download{
-                display: flex;
-                width: 100%;
-                position: relative;
-                background-color: #F8F8F8;
-                min-height: 750px;
-                margin-top: 20px;
-            }
-            #download-1{
-                padding: 123px 40px 0;
-                z-index: 10;
-            }
-            #download-1 h1{
-                font-size: 3vw;
-                max-width: 600px;
-                line-height: 80px;
-            }
-            #download-1 p{
-                padding: 20px 0px 30px;
-                max-width: 45%;
-                line-height: 30px;
-                color: #888888;
-            }
-            #download-2{
-                position: absolute;
-                top: 0;
-                right: 0;
-                z-index: 9;
-            }
-            #download-image{
-                display: flex;
-                width: 200px;
-            }
-            #download-image img{
-                width: 100px;
-            }
-            #footer{
-                display: flex;
-                margin-top: 70px;
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-            #footer-1,#footer-2,#footer-3,#footer-4{
-                flex-basis: 20%;
-                padding: 20px;
-            }
-            #footer a{
-                text-decoration: none;
-                color: black;
-            }
-            #footer li{
-                list-style: none;
-            }
-            #footer-1 p{
-                color: #888888;
-                line-height: 25px;
-                margin:15px 0;
-                font-size: 15px;
-            }
-            #footer-1 h3{
-                margin: 15px 0;
-            }
-            #footer-2 li{
-                margin: 20px 0;
-                font-size: 15px;
-            }
-            #footer-2 a:hover{
-                color: #FF4D30;
-            }
-            #footer-3 p{
-                margin: 20px 0;
-                font-size: 15px;
-            }
-            #footer-4{
-                display: flex;
-                flex-direction: column;
-            }
-            #footer-4 p{
-                font-size: 20px;
-                margin: 20px 0;
-            }
-            #footer-4 input{
-                padding: 15px 40px;
-                background-color:#ECECEC;
-                border: none;
-                outline: none;
-                font-size: 15px;
-            }
-            #footer-4 button{
-                cursor: pointer;
-                background-color:#FF4D30;
-                border:none;
-                margin-top: 10px;
-                line-height: 30px;
-                padding: 7px 15px;
-                color: white;
-                font-size: 15px;
-            }
-            #menu-icon-responsive{
-                display: none;
-                font-size: 30px;
-                color: #df2d12;
-                cursor: pointer;
-            }
-            #header-menu-responsive{
-                opacity: 0;
-                visibility: hidden;
-                transition: opacity 0.3s ease;
-                width: 100%;
-                height: 100%;
-                z-index: 1000;
-                position: fixed;
-                top: 0;
-                right: 0;
-                background-color: rgba(0, 0, 0, 0.5);
-            }
-            #header-menu-responsive-2{
-                padding-top: 30px;
-                padding-left: 20px;
-                top: 0;
-                right: -100%;
-                background-color: white;
-                z-index: 1001;
-                height: 100%;
-                width: 40%;
-                position: fixed;
-                transition: right 0.3s ease;
-            }
-            #header-menu-responsive-2 li{
-                list-style: none;
-                margin:10px;
-            }
-            #header-menu-responsive-2 li>a{
-                text-decoration: none;
-                color: black;
-                font-size: 20px;
-            }
-            #header-menu-responsive-2 li>a:hover{
-                color: #FA4226;
-            }
-            #header-menu-responsive-2 ul{
-                display: flex;
-                flex-direction: column;
-            }
-            #Login-Register-responsive{
-                display: flex;
-                flex-direction: column;
-                flex-wrap: wrap;
-            }
-            .login-responsive{
-                background-color: black;
-                color: white;
-                padding: 15px 50px;
-                border-radius: 10px;
-                width: 80%;
-                position: absolute;
-                top: 95px;
-                left: 50%;
-                transform: translate(-60%, -50%);
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .register-responsive{
-                background-color: #FF4D30;
-                color: white;
-                padding: 15px 50px;
-                border-radius: 10px;
-                width: 80%;
-                position: absolute;
-                top: 30px;
-                left: 50%;
-                transform: translate(-60%, -50%);
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            @media screen and (max-width: 1200px){
-                #header-menu{
-                    display: none;
-                }
-                #Login-Register{
-                    display: none;
-                }
-                .register{
-                    margin-top: 10px;
-                }
-                .car-features{
-                    flex-basis: 50%;
-                }
-                #footer-1,#footer-2,#footer-3,#footer-4{
-                    flex-basis: 50%;
-                }
-                #download-2 img{
-                    display: none;
-                }
-                #download-1{
-                    width: 80%;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-                #download-1 p{
-                    min-width: 80%;
-                }
-                #menu-icon-responsive{
-                    display: block;
-                    z-index: 1000;
-                    position: fixed;
-                    right: 10px;
-                    top: 10px;
-                }
-                #main-car{
-                    opacity: 0.2;
-                }
-            }
-            @media screen and (max-width: 992px){
-                #car-home-content{
-                    flex-basis: 50%;
-                }
-                #header-image{
-                    display: none;
-                }
-                #main-car{
-                    display: none;
-                }
-                #hero-content{
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-                .car-features{
-                    flex-basis: 100%;
-                }
-                #why-choose-us-1,#why-choose-us-2{
-                    flex-basis: 100%;
-                }
-
-            }
-            @media screen and (max-width: 768px){
-                #car-home-content{
-                    flex-basis: 100%;
-                }
-                .review-by-people-2{
-                    flex-basis: 100%;
-                    margin-top: 20px;
-                }
-                .review-by-people-2 p{
-                    font-size: 1.7vw;
-                }
-                #footer-1,#footer-2,#footer-3,#footer-4{
-                    flex-basis: 100%;
-                }
-            }
-            #scrollToTop{
-                display: none;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background-color: #FA4226;
-                color: white;
-                position: fixed;
-                bottom: 30px;
-                right: 30px;
-                z-index: 1003;
-                border: none;
-                cursor: pointer;
-            }
-            #scrollToTop:hover{
-                background-color: #df2d12;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="header">
-            <div id="header-left" onclick="window.location.href='http://127.0.0.1:8000/';" style="cursor: pointer">
-                <ion-icon name="car-sport"></ion-icon>
-                <h3>Car Rental</h3>
-            </div>
-            <ul id="header-menu">
-                <li><a href="/">Trang chủ</a></li>
-                <li><a href="/car">Phương tiện</a></li>
-                <li><a href="/feedback">Phản hồi</a></li>
-                <li><a href="/about">Giới thiệu</a></li>
-                <li><a href="/contact">Liên hệ</a></li>
-            </ul>
-            <div id="Login-Register">
-                @if (Route::has('login'))
-                    <div>
-                        @auth
-                            @if (Auth::user()->role === 'admin')
-                                <a id="account" href="{{ url('/admin') }}">Trang quản trị</a>
-                            @else
-                                <a id="account" href="{{ url('/dashboard') }}">Tài khoản</a>
-                            @endif
-                        @else
-                            <a class="login" href="{{ route('login') }}">Đăng nhập</a>
-
-                            @if (Route::has('register'))
-                                <a class="register" href="{{ route('login') }}">Đăng ký</a>
-                            @endif
-                        @endauth
-                    </div>
-                @endif
-            </div>
-            <ion-icon id="menu-icon-responsive" name="grid-outline"></ion-icon>
-            <div id="header-image">
-                <img src="{{ asset('storage/cars-welcome/hero-bg.png') }}" alt="hero-bg">
-            </div>
-            <div id="main-car">
-                <img src="{{ asset('storage/cars-welcome/main-car.png') }}" alt="main-car">
-            </div>
-            <div id="hero-content">
-                <h1>Lên kế hoạch cho chuyến đi ngay!</h1>
-                <h2>Tiết kiệm <plan style="color: #FA4226">lớn</plan> khi thuê xe của chúng tôi</h2>
-                <p>Thuê chiếc xe mơ ước của bạn. Giá cạnh tranh nhất, số dặm không giới hạn, các lựa chọn đón khách linh hoạt và hơn thế nữa.</p>
-                <a id="book-ride" href="\login">Đặt ngay</a>
-                <a id="learn-more" href="\car">Xem tất cả</a>
-            </div>
-        </div>
-        <div id="header-menu-responsive"></div>
-        <div id="header-menu-responsive-2">
-            <ul>
-                <li><a href="/">Trang chủ</a></li>
-                <li><a href="/car">Phương tiện</a></li>
-                <li><a href="/feedback">Phản hồi</a></li>
-                <li><a href="/about">Giới thiệu</a></li>
-                <li><a href="/contact">Liên hệ</a></li>
-            </ul>
-            <div id="Login-Register-responsive">
-                @if (Route::has('login'))
-                    <div>
-                        @auth
-                            @if (Auth::user()->role === 'admin')
-                                <a id="account" href="{{ url('/admin') }}">Trang quản trị</a>
-                            @else
-                                <a id="account" href="{{ url('/dashboard') }}">Tài khoản</a>
-                            @endif
-                        @else
-                            <a class="login-responsive" href="{{ route('login') }}">Đăng nhập</a>
-
-                            @if (Route::has('register'))
-                                <a class="register-responsive" href="{{ route('login') }}">Đăng ký</a>
-                            @endif
-                        @endauth
-                    </div>
-                @endif
-            </div>
-        </div>
-        <div id="car-features">
-            <h1>Lên kế hoạch cho chuyến đi của bạn</h1>
-            <h2>Thuê xe nhanh chóng & dễ dàng</h2>
-        </div>
-        <div id="car-features-2">
-            <div class="car-features">
-                <ion-icon name="navigate-outline"></ion-icon>
-                <h1>Sẵn sàng</h1>
-                <p>Sẵn sàng với nhiều lựa chọn phù hợp với nhu cầu của bạn.</p>
-            </div>
-            <div class="car-features">
-                <ion-icon name="car-sport-outline"></ion-icon>
-                <h1>Trải nghiệm tốt</h1>
-                <p>đảm bảo sự thoải mái với không gian rộng rãi và tiện nghi hiện đại.</p>
-            </div>
-            <div class="car-features">
-                <ion-icon name="bookmark-outline"></ion-icon>
-                <h1>Giá cả hợp lý</h1>
-                <p>cung cấp dịch vụ cho thuê xe với giá cả hợp lý và nhiều ưu đãi.</p>
-            </div>
-        </div>
-        <div id="view-all">
-            <h1>Các mẫu xe mới nhất</h1>
-            <h2>Những hãng xe cho thuê của chúng tôi</h2>
-            <p>Chọn từ nhiều loại phương tiện tuyệt vời của chúng tôi để thuê cho chuyến phiêu lưu hoặc chuyến công tác tiếp theo của bạn</p>
-        </div>
-        <div id="view-all-2">
-            <h1>Hãy chọn chiếc xe phù hợp với bạn</h1>
-            <a href="/car">Xem tất cả -></a>
-        </div>
-        <div id="car-home">
-            @foreach ($cars as $car)
-            <div id="car-home-content">
-                <img src="{{ asset('storage/' . $car->image_url) }}" alt="{{ $car->name }}">
-                <div class="car-home-content-1">
-                    <div class="car-home-content-2">
-                        <h1 id="trademark">{{$car->trademark}}</h1>
-                        <p id="name">{{$car->name}}</p>
-                    </div>
-                    <div class="car-home-content-2">
-                        <h1 style="font-size: 15px">{{ number_format($car->price_per_day, 0, ',', '.') }} VND</h1>
-                        <p style="font-size: 1.5vw">/ ngày</p>
-                    </div>
-                </div>
-                <a href="/car/show/{{$car->id}}">Xem chi tiết</a>
-            </div>
-            @endforeach
-        </div>
-        <div id="save-big">
-            <h1>Tiết kiệm lớn với dịch vụ thuê xe giá rẻ của chúng tôi!</h1>
-            <p>Hỗ trợ <span style="color: #FA4226"> 24/7</span></p>
-        </div>
-        <div id="car-home-2">
-            <img id="lexus-home" src="{{ asset('storage/cars-welcome/lexus-home.png') }}" alt="lexus-home">
-            <img id="audi-home" src="{{ asset('storage/cars-welcome/audi-home.png') }}" alt="audi-home">
-        </div>
-        <div id="why-choose-us">
-            <div id="why-choose-us-1">
-                <h2>Tại sao nên chọn chúng tôi</h2>
-                <h1>Giao dịch có giá trị tốt nhất mà bạn từng tìm thấy</h1>
-                <p>Khám phá những giao dịch tốt nhất mà bạn từng tìm thấy với những ưu đãi không thể tuyệt vời hơn của chúng tôi. Chúng tôi tận tâm cung cấp cho bạn giá trị tốt nhất cho số tiền bạn bỏ ra để bạn có thể tận hưởng các dịch vụ và sản phẩm chất lượng hàng đầu mà không phải tốn nhiều tiền. Các ưu đãi của chúng tôi được thiết kế để mang lại cho bạn trải nghiệm thuê xe tối ưu, vì vậy đừng bỏ lỡ cơ hội này</p>
-            </div>
-            <div id="why-choose-us-2">
-                <div class="why-choose-us-2">
-                    <img id="icon-1" src="{{ asset('storage/icon-home/icon1.png') }}" alt="icon-1">
-                    <div>
-                        <h1>Lái xe xuyên quốc gia</h1>
-                        <p>Đưa trải nghiệm lái xe của bạn lên một tầm cao mới với những chiếc xe hàng đầu của chúng tôi cho chuyến phiêu lưu xuyên quốc gia của bạn.</p>
-                    </div>
-                </div>
-                <div class="why-choose-us-2">
-                    <img id="icon-2" src="{{ asset('storage/icon-home/icon2.png') }}" alt="icon-2">
-                    <div>
-                        <h1>Giá trọn gói</h1>
-                        <p>Nhận mọi thứ bạn cần với một mức giá thuận tiện, minh bạch với chính sách giá trọn gói của chúng tôi.</p>
-                    </div>
-                </div>
-                <div class="why-choose-us-2">
-                    <img id="icon-3" src="{{ asset('storage/icon-home/icon3.png') }}" alt="icon-3">
-                    <div>
-                        <h1>Không có phí ẩn</h1>
-                        <p>Tận hưởng sự yên tâm với chính sách không có phí ẩn của chúng tôi. Chúng tôi tin vào giá cả minh bạch và trung thực.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="reviewed-by-people">
-            <h1>Đánh giá của khách hàng</h1>
-            <h2>Lời chứng thực của khách hàng</h2>
-            <p>Khám phá tác động tích cực mà chúng tôi đã tạo ra đối với khách hàng bằng cách đọc qua lời chứng thực của họ. Khách hàng của chúng tôi đã trải nghiệm dịch vụ và kết quả của chúng tôi và họ mong muốn chia sẻ những trải nghiệm tích cực của mình với bạn.</p>
-        </div>
-        <div id="review-by-people-2">
-            <div class="review-by-people-2">
-                <p>"Chúng tôi đã thuê một chiếc ô tô từ trang web này và đã có một trải nghiệm tuyệt vời! Việc đặt xe rất dễ dàng và giá thuê rất phải chăng. "</p>
-                <div>
-                    <img id="reviewed-by-people-donald-trump" src="{{ asset('storage/review-by-people-home/reviewed-by-people-donald-trump.jpg') }}" alt="reviewed-by-people-donald-trump">
-                    <h1>Donald trump</h1>
-                </div>
-            </div>
-            <div class="review-by-people-2">
-                <p>"Chiếc xe ở tình trạng tốt và khiến chuyến đi của chúng tôi trở nên tuyệt vời hơn. Rất khuyến khích bạn chọn trang web cho thuê xe này!"</p>
-                <div>
-                    <img id="reviewed-by-people-putin" src="{{ asset('storage/review-by-people-home/reviewed-by-people-putin.jpg') }}" alt="reviewed-by-people-putin">
-                    <h1>Putin</h1>
-                </div>
-            </div>
-        </div>
-        <div id="home-menu-accordion">
-            <h1>FAQ</h1>
-            <h2>Câu hỏi thường gặp</h2>
-            <p>Câu hỏi thường gặp về quy trình đặt thuê xe trên trang web của chúng tôi: Câu trả lời cho những mối quan tâm và thắc mắc thường gặp.</p>
-        </div>
-        <div id="home-menu-accordion-2">
-            <div id="accordion-car">
-                <img id="car-faq" src="{{ asset('storage/cars-welcome/car-faq.png') }}" alt="car-faq.png">
-            </div>
-            <div id="accordion-content">
-                <h1 id="accordion-header-1">Câu hỏi 1: Tôi cần giấy tờ gì để thuê xe?</h1>
-                <p id="accordion-content-1">Để thuê xe tại trang web của chúng tôi, bạn cần chuẩn bị các giấy tờ cần thiết bao gồm giấy tờ tùy thân (CMND, CCCD hoặc hộ chiếu còn hiệu lực) và bằng lái xe hợp lệ tương ứng với loại xe bạn muốn thuê; trong trường hợp thuê xe tự lái, bằng lái xe phải đáp ứng các yêu cầu pháp lý, đảm bảo còn hiệu lực và phù hợp với quy định về phương tiện di chuyển.</p>
-                <h1 id="accordion-header-2">Câu hỏi 2: Tôi có thể hủy đặt xe không? Có mất phí không?</h1>
-                <p id="accordion-content-2">Bạn hoàn toàn có thể hủy đặt xe khi có sự thay đổi về kế hoạch; tuy nhiên, việc có mất phí hay không sẽ phụ thuộc vào thời điểm bạn thực hiện yêu cầu hủy, bởi nếu hủy đúng thời hạn quy định trong chính sách của chúng tôi thì bạn sẽ không phải chịu bất kỳ khoản phí nào, còn nếu hủy sát giờ hoặc sau thời hạn đã thỏa thuận thì có thể áp dụng mức phí hủy theo quy định; vui lòng tham khảo chi tiết chính sách hoặc liên hệ đội ngũ hỗ trợ để được hướng dẫn cụ thể.</p>
-                <h1 id="accordion-header-3">Câu hỏi 3: Giá thuê xe đã bao gồm xăng chưa?</h1>
-                <p id="accordion-content-3">Giá thuê xe hiển thị trên trang web của chúng tôi chưa bao gồm chi phí xăng; chúng tôi bàn giao xe với bình xăng đầy để đảm bảo sự tiện lợi tối đa cho khách hàng và mong muốn nhận lại xe trong tình trạng bình xăng tương tự; nếu có thắc mắc, bạn có thể liên hệ trực tiếp để được giải đáp thêm về chính sách liên quan đến nhiên liệu.</p>
-            </div>
-        </div>
-        <div id="download">
-            <div id="download-1">
-                <h1>Tải xuống ứng dụng của chúng tôi để tận dụng tối đa nó</h1>
-                <p>Trải nghiệm mọi tính năng tiện ích của chúng tôi bằng cách tải ứng dụng trực tiếp từ cửa hàng ứng dụng trên điện thoại của bạn. Ứng dụng hỗ trợ cả hệ điều hành iOS và Android, đảm bảo hoạt động mượt mà và dễ sử dụng. Hãy cài đặt ngay hôm nay để tận hưởng dịch vụ tốt nhất mọi lúc, mọi nơi!</p>
-                <div id="download-image">
-                    <img src="{{ asset('storage/home-download/appstore.svg') }}" alt="appstore">
-                    <img src="{{ asset('storage/home-download/googleapp.svg') }}" alt="googleapp">
-                </div>
-            </div>
-            <div id="download-2">
-                <img src="{{ asset('storage/home-download/bg02.png') }}" alt="bg02">
-            </div>
-        </div>
-        <div id="footer">
-            <div id="footer-1">
-                <h1>Thuê xe</h1>
-                <p>Chúng tôi cung cấp nhiều loại xe đáp ứng mọi nhu cầu lái xe của bạn. Chúng tôi có chiếc xe hoàn hảo để đáp ứng nhu cầu của bạn.</p>
-                <h2>0123-456-789</h2>
-                <h3>Hoang@gmail.com</h3>
-                <h4>Thiết kế: Pham Viet Hoang</h4>
-            </div>
-            <div id="footer-2">
-                <h1>Công ty</h1>
-                <ul>
-                    <li><a href="#">Phòng trưng bày</a></li>
-                    <li><a href="#">Sự nghiệp</a></li>
-                    <li><a href="#">Điện thoại di động</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Cách chúng tôi làm việc</a></li>
-                </ul>
-            </div>
-            <div id="footer-3">
-                <h1>Thời gian làm việc</h1>
-                <p>Thứ 2 - Thứ 6, từ 8 giờ sáng - 9 giờ tối</p>
-                <p>Thứ 7: 8 giờ sáng - 7 giờ tối</p>
-                <p>Chủ nhật: đóng cửa</p>
-            </div>
-            <div id="footer-4">
-                <h1>Đăng ký</h1>
-                <p>Đăng ký địa chỉ Email của bạn để nhận tin tức và cập nhật mới nhất.</p>
-                <input type="text" placeholder="Nhập địa chỉ email">
-                <button>Xác nhận</button>
-            </div>
-        </div>
-        <button id="scrollToTop">↑</button>
-        <script>
-            const accordionHeader1 = document.getElementById("accordion-header-1");
-            const accordionContent1 = document.getElementById("accordion-content-1");
-            const accordionHeader2 = document.getElementById("accordion-header-2");
-            const accordionContent2 = document.getElementById("accordion-content-2");
-            const accordionHeader3 = document.getElementById("accordion-header-3");
-            const accordionContent3 = document.getElementById("accordion-content-3");
-            accordionContent1.style.maxHeight = 200+"px";
-            accordionContent2.style.maxHeight = 0 + "px";
-            accordionContent3.style.maxHeight = 0 + "px";
-            accordionHeader1.addEventListener("click",() => {
-                if(accordionContent1.style.maxHeight == "0px"){
-                    accordionHeader1.style.backgroundColor = "#FF4D30"
-                    accordionHeader1.style.color = "white"
-                    accordionContent1.style.maxHeight = 200+"px"
-                }
-                else{
-                    accordionHeader1.style.backgroundColor = "white"
-                    accordionHeader1.style.color = "black"
-                    accordionContent1.style.maxHeight = 0+"px"
-                }
-                accordionContent2.style.maxHeight = 0 + "px";
-                accordionContent3.style.maxHeight = 0 + "px";
-                accordionHeader2.style.backgroundColor = "white"
-                accordionHeader3.style.backgroundColor = "white"
-                accordionHeader2.style.color = "black"
-                accordionHeader3.style.color = "black"
-            })
-            //
-            accordionHeader2.addEventListener("click",() => {
-                if(accordionContent2.style.maxHeight == "0px"){
-                    accordionHeader2.style.backgroundColor = "#FF4D30"
-                    accordionHeader2.style.color = "white"
-                    accordionContent2.style.maxHeight = 200+"px"
-                }
-                else{
-                    accordionHeader2.style.backgroundColor = "white"
-                    accordionHeader2.style.color = "black"
-                    accordionContent2.style.maxHeight = 0+"px"
-                }
-                accordionContent1.style.maxHeight = 0 + "px";
-                accordionContent3.style.maxHeight = 0 + "px";
-                accordionHeader1.style.backgroundColor = "white"
-                accordionHeader3.style.backgroundColor = "white"
-                accordionHeader1.style.color = "black"
-                accordionHeader3.style.color = "black"
-            })
-            //
-            accordionHeader3.addEventListener("click",() => {
-                if(accordionContent3.style.maxHeight == "0px"){
-                    accordionHeader3.style.backgroundColor = "#FF4D30"
-                    accordionHeader3.style.color = "white"
-                    accordionContent3.style.maxHeight = 200+"px"
-                }
-                else{
-                    accordionHeader3.style.backgroundColor = "white"
-                    accordionHeader3.style.color = "black"
-                    accordionContent3.style.maxHeight = 0+"px"
-                }
-                accordionContent2.style.maxHeight = 0 + "px";
-                accordionContent1.style.maxHeight = 0 + "px";
-                accordionHeader2.style.backgroundColor = "white"
-                accordionHeader1.style.backgroundColor = "white"
-                accordionHeader2.style.color = "black"
-                accordionHeader1.style.color = "black"
-            })
-            //
-            const menuIconResponsive = document.getElementById("menu-icon-responsive")
-            const headerMenuResponsive = document.getElementById("header-menu-responsive")
-            const headerMenuResponsive2 = document.getElementById("header-menu-responsive-2")
-            menuIconResponsive.addEventListener("click",() => {
-                headerMenuResponsive.style.opacity = 1;
-                headerMenuResponsive.style.visibility = "visible";
-                menuIconResponsive.style.display = "none";
-                headerMenuResponsive2.style.right = 0;
-            })
-            headerMenuResponsive.addEventListener("click",() => {
-                headerMenuResponsive.style.opacity = 0;
-                menuIconResponsive.style.display = "block";
-                headerMenuResponsive2.style.right = -100 + "%";
-                headerMenuResponsive.style.visibility = "hidden";
-            })
-
-            //
-            const scrollToTop = document.getElementById("scrollToTop");
-            window.onscroll = function(){
-                if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100){
-                    scrollToTop.style.display = "block";
-                }
-                else{
-                    scrollToTop.style.display = "none";
-                }
-            }
-            scrollToTop.addEventListener("click",() => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                })
-            })
-            //
-            document.querySelectorAll('*').forEach(el => {
-    if (el.scrollWidth > el.clientWidth) {
-        console.log(el);
-    }
-});
-        </script>
-    </body>
-</html> --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/99e557a6de.js" crossorigin="anonymous"></script>
     <title>DriveLux</title>
     <style>
         *{
@@ -1163,7 +44,7 @@
             display: flex;
             gap: 35px;
         }
-        .login{
+        .login,#account{
             color: #FAFAFA !important;
             transition: all 0.5s ease-in-out;
             padding: 12px 32px;
@@ -1171,7 +52,7 @@
             border-radius: 50px;
             background-color: #2C2D2F;
         }
-        .login:hover {
+        .login:hover,#account:hover {
             transform: scale(1.025);
             outline: 2px solid #57d3c9;
             box-shadow: 4px 5px 17px -4px #2CB9AD;
@@ -1277,9 +158,10 @@
         #logo-div{
             display: flex;
             justify-content: center;
+            margin-top: 100px;
         }
         #logo{
-            width: 1000px;
+            width: 750px;
             overflow: hidden;
             white-space: nowrap;
         }
@@ -1290,8 +172,8 @@
             animation: slide 20s linear infinite;
         }
         .logo-items{
-            width:250px;
-            height: 250px;
+            width:150px;
+            height: 150px;
             display: flex;
             align-items: center;
         }
@@ -1312,6 +194,7 @@
         #slider-container-center{
             display: flex;
             justify-content: center;
+            margin-bottom: 100px;
         }
         .slider-container {
             width: 1200px; /* Hiển thị 3 div mỗi div rộng 100px */
@@ -1332,18 +215,58 @@
             align-items: center;
             margin: 5px;
         }
-        .btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
+        #prev-next{
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0px 0 80px;
+            margin-top: 100px;
+        }
+        #prev-next-btn{
+            display: flex;
+            gap: 30px;
+        }
+        #prev-next-btn button{
+            background-color: #F0F2F4;
+            color:#2CB9AD;
+            width: 50px;
+            height: 50px;
             border: none;
-            padding: 10px;
+            border-radius: 15px;
+            font-size: 35px;
             cursor: pointer;
         }
-        .prev { left: 0; }
-        .next { right: 0; }
+        #prev-next-text{
+            display: flex;
+        }
+        #prev-next-text p{
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 160%;
+            letter-spacing: 0.05em;
+            color: #1B1C1E;
+            padding: 0 30px;
+            text-align: end;
+            width: 60%;
+        }
+        #prev-next-text h2{
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 120%;
+            color: rgb(27, 28, 30);
+            margin-bottom: 24px;
+        }
+        #prev-next-text>div{
+            position: relative;
+        }
+        #prev-next-text>div>div{
+            bottom: 10px;
+            position: absolute;
+            width: 280px; /* Độ dài */
+            height: 10px; /* Độ dày */
+            background-color: #27B3AC; /* Màu xanh */
+            clip-path: polygon(0% 50%, 5% 0%, 100% 0%, 100% 100%, 5% 100%);
+        }
+
         .slide img{
             width: 100%;
             height: 200px;
@@ -1397,6 +320,746 @@
             display: flex;
             justify-content: center;
         }
+        #how-to-book{
+            margin-top: 100px;
+            display: flex;
+            margin: auto;
+            gap: 50px;
+            align-items: center;
+            margin-left: 100px;
+        }
+        #how-to-book h2{
+            font-weight: 700;
+            font-size: 57px;
+            line-height: 120%;
+            color: #1B1C1E;
+        }
+        #how-to-book p{
+            color: #1B1C1E;
+            font-size: 20px;
+            width: 35%;
+            margin-bottom: 10px;
+            line-height: 160%;
+        }
+        #how-to-book>div>div{
+            margin-top: 10px;
+            width: 300px;
+            height: 10px;
+            background-color: #2AB8B8;
+            clip-path: polygon(0% 0%, 95% 0%, 100% 50%, 95% 100%, 0% 100%);
+        }
+        #book-area{
+            display: flex;
+            background-color: #2CB9AD;
+            position: relative;
+            height: 150px;
+            margin-top: 50px;
+        }
+        .book-area-2{
+            position: relative;
+            position: absolute;
+            left: 293px;
+            height: 150px;
+            width: 397px;
+            top: 2px;
+        }
+        .book-area-3{
+            position: relative;
+            position: absolute;
+            left: 610px;
+            height: 150px;
+            width: 397px;
+            top: 2px;
+        }
+
+        .book-area-2>div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            height: 50px;
+        }
+        .book-area-3>div{
+            position: absolute;
+            top: 50%;
+            left: 55%;
+            transform: translate(-50%,-50%);
+            height: 50px;
+        }
+        .book-area-2>img,.book-area-3>img{
+            width: 100%;
+        }
+        .book-area-1 h5,.book-area-1 p{
+            color: #FAFAFA;
+            font-size: 25px;
+        }
+        .book-area-1 p{
+            font-weight: 600;
+        }
+        .book-area-1{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 40px;
+        }
+        .book-area-4{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0px;
+            width: 350px;
+        }
+        .book-area-4 img{
+            width: 100%;
+        }
+        .book-area-2 h5, .book-area-3 h5{
+            color: #2CB9AD;
+            font-weight: 600;
+            font-size: 25px;
+        }
+        .book-area-2 p,.book-area-3 p{
+            color: #797D86;
+            font-weight: 600;
+            font-size: 20px;
+            margin-top: 5px;
+            white-space: nowrap;
+        }
+
+
+        #slider-container-center-2{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 100px;
+        }
+        .slider-container-2 {
+            width: 1200px; /* Hiển thị 3 div mỗi div rộng 100px */
+            overflow: hidden;
+            position: relative;
+        }
+        .slider-2 {
+            display: flex;
+            width: 4800px; /* 6 div * 400px * 2 (clone để tạo hiệu ứng lặp vô hạn) */
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide-2 {
+            width: 400px;
+            height: auto;
+            background: #F0F2F4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+        }
+        #prev-next-2{
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0px 0 80px;
+            margin-top: 100px;
+        }
+        #prev-next-btn-2{
+            display: flex;
+            gap: 30px;
+        }
+        #prev-next-btn-2 button{
+            background-color: #F0F2F4;
+            color:#2CB9AD;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 15px;
+            font-size: 35px;
+            cursor: pointer;
+        }
+        #prev-next-text-2{
+            display: flex;
+        }
+        #prev-next-text-2 p{
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 160%;
+            letter-spacing: 0.05em;
+            color: #1B1C1E;
+            padding: 0 30px;
+            text-align: end;
+            width: 60%;
+        }
+        #prev-next-text-2 h2{
+            font-weight: 700;
+            font-size: 57px;
+            line-height: 120%;
+            color: rgb(27, 28, 30);
+            margin-bottom: 24px;
+        }
+        #prev-next-text-2>div{
+            position: relative;
+        }
+        #prev-next-text-2>div>div{
+            bottom: 10px;
+            position: absolute;
+            width: 280px; /* Độ dài */
+            height: 10px; /* Độ dày */
+            background-color: #27B3AC; /* Màu xanh */
+            clip-path: polygon(0% 50%, 5% 0%, 100% 0%, 100% 100%, 5% 100%);
+        }
+
+        .slide-2 img{
+            width: 100%;
+            height: 200px;
+            border-radius: 20px;
+        }
+        .slide-2{
+            border-radius: 20px;
+            padding: 20px;
+        }
+        .slide-car-info-div-2{
+            border-radius: 20px;
+            background-color: white;
+            margin-top: 20px;
+            width: 100%;
+            padding: 20px;
+        }
+        .slide-car-info-2{
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            align-items: center;
+        }
+        .slide-car-info-2 h1{
+            font-weight: 200;
+            font-size: 15px;
+        }
+        .slide-car-info-2 p{
+            font-size: 15px;
+        }
+        .slide-car-info-2>p>span{
+            color: #2CB9AD;
+        }
+        .slide-2 a{
+            color: #FAFAFA !important;
+            transition: all 0.5s ease-in-out;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 50px;
+            background-color: #2C2D2F;
+            text-decoration: none;
+            margin: auto;
+        }
+        .slide-2 a:hover{
+            transform: scale(1.025);
+            outline: 2px solid #57d3c9;
+            box-shadow: 4px 5px 17px -4px #2CB9AD;
+            background-color: #2CB9AD;
+        }
+        #slide-a-2{
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+
+        #vehicle-categories{
+            margin-top: 100px;
+            display: flex;
+            margin: auto;
+            gap: 50px;
+            align-items: center;
+            margin-left: 100px;
+        }
+        #vehicle-categories h2{
+            font-weight: 700;
+            font-size: 57px;
+            line-height: 120%;
+            color: #1B1C1E;
+        }
+        #vehicle-categories p{
+            color: #1B1C1E;
+            font-size: 20px;
+            width: 35%;
+            margin-bottom: 10px;
+            line-height: 160%;
+        }
+        #vehicle-categories>div>div{
+            margin-top: 10px;
+            width: 300px;
+            height: 10px;
+            background-color: #2AB8B8;
+            clip-path: polygon(0% 0%, 95% 0%, 100% 50%, 95% 100%, 0% 100%);
+        }
+        #trademark-categories{
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 80px;
+            flex-wrap: wrap;
+            column-gap: 80px;
+            row-gap: 40px;
+            position: relative;
+        }
+        #trademark-categories .image-car{
+            transform: skewX(-11deg) skewY(0deg);
+            border-radius: 30px;
+            box-shadow: 42px 42px 24px rgba(0, 0, 0, 0.01), 24px 24px 20px rgba(0, 0, 0, 0.03), 11px 11px 15px rgba(0, 0, 0, 0.04), 3px 3px 8px rgba(0, 0, 0, 0.05), 0px 0px 0px rgba(0, 0, 0, 0.05);
+            position: relative;
+            width: 410px;
+            height: 752px;
+            transition: all 0.5s ease-in-out;
+            z-index: 2;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            flex-basis: 30%;
+        }
+        #trademark-categories img{
+            display: inline-block;
+            transform: skewX(-11deg) skewY(0deg) !important;
+            border-radius: 30px;
+            box-shadow: 42px 42px 24px rgba(0, 0, 0, 0.01), 24px 24px 20px rgba(0, 0, 0, 0.03), 11px 11px 15px rgba(0, 0, 0, 0.04), 3px 3px 8px rgba(0, 0, 0, 0.05), 0px 0px 0px rgba(0, 0, 0, 0.05);
+            position: relative;
+            width: 300% ;
+            transition: all 0.5s ease-in-out;
+            z-index: 2;
+        }
+        #trademark-categories p{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 4;
+            background-color: white;
+            color: #1B1C1E;
+            border: 2px solid white;
+            opacity: 0;
+            transition: all 1s ease;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        #trademark-categories .image-car:hover p{
+            opacity: 1;
+        }
+        #trademark-categories p:hover{
+            background-color: transparent;
+            color: white;
+        }
+        #trademark-categories .image-car::after{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            transition: background 0.3s ease;
+            z-index: 3;
+        }
+        #trademark-categories .image-car:hover::after {
+            background: rgba(0, 0, 0, 0.5); /* Khi hover sẽ có lớp đen mờ */
+        }
+
+        #trademark-categories .image-car>div{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 600px;
+            height: 1000px;
+            background-color: red;
+            z-index: 4;
+            transform: skewX(-11deg) skewY(0deg);
+        }
+        #trademark-categories>div{
+            position: relative;
+        }
+        #overlay1,#overlay2,#overlay3{
+            width: 410px;
+            height: 752px;
+            background-color: #F0F2F4;
+            transform: skewX(-11deg) skewY(0deg);
+            border-radius: 30px;
+            transition: all 0.5s ease-in-out;
+            z-index: 1;
+            position: absolute;
+            top: 0;left: 0px;
+        }
+        #t-c-1:hover>#overlay1,#t-c-2:hover>#overlay2,#t-c-3:hover>#overlay3{
+            transform: skewX(7deg) skewY(0deg);
+        }
+        #why-choose-us{
+            display: flex;
+            margin-top: 80px;
+            justify-content: flex-end;
+            margin-right: 100px;        }
+        #why-choose-us p{
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 160%;
+            letter-spacing: 0.05em;
+            color: #1B1C1E;
+            padding: 0 30px;
+            text-align: end;
+            width: 50%;
+        }
+        #why-choose-us h2{
+            font-weight: 700;
+            font-size: 27px;
+            line-height: 120%;
+            color: rgb(27, 28, 30);
+            margin-bottom: 24px;
+        }
+        #why-choose-us>div{
+            position: relative;
+        }
+        #why-choose-us>div>div{
+            right: 0;
+            bottom: 10px;
+            position: absolute;
+            width: 280px; /* Độ dài */
+            height: 10px; /* Độ dày */
+            background-color: #27B3AC; /* Màu xanh */
+            clip-path: polygon(0% 50%, 5% 0%, 100% 0%, 100% 100%, 5% 100%);
+        }
+        #why-choose-us-2{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 0 100px;
+            margin-top: 50px;
+        }
+        #why-choose-us-2>div{
+            flex: 0 1 calc((100% - 40px) / 2);
+            background-color: #F0F2F4;
+            height: 170px;
+            padding: 30px;
+            border-radius: 40px;
+        }
+        #why-choose-us-2>div>div{
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        #why-choose-us-2 h4{
+            font-weight: 600;
+            font-size: 32px;
+            line-height: 120%;
+            color: #2C2D2F;
+            margin: 0;
+        }
+        #newsletter{
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 250px;
+            margin-top: 60px;
+            margin-bottom: 70px;
+            position: relative;
+            background-image: url('{{ asset('storage/home/newsletter-bg.png') }}');
+        }
+        #newsletter-form{
+            position: absolute;
+            top: 50%;
+            left: 55%;
+            transform: translate(-50%,-50%);
+            background-color:#EFF1F3;
+            border-radius: 20px;
+            height: 190px;
+            width: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #newsletter-form p{
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 120%;
+            text-align: center;
+            color: #2C2D2F;
+            margin: 15px 0;
+        }
+        #newsletter-form input{
+            padding: 10px 20px;
+            border-radius: 30px;
+            height: 50px;
+            width: 80%;
+            border: none;
+            outline: none;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+        }
+        #newsletter-form a{
+            color: #FAFAFA !important;
+            transition: all 0.5s ease-in-out;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 50px;
+            background-color: #2C2D2F;
+            text-decoration: none;
+            margin: auto;
+        }
+        #newsletter-form a:hover{
+            transform: scale(1.025);
+            outline: 2px solid #57d3c9;
+            box-shadow: 4px 5px 17px -4px #2CB9AD;
+            background-color: #2CB9AD;
+        }
+        #newsletter-text>div{
+            display: flex;
+            gap: 10px;
+        }
+        #newsletter-text{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;padding-left: 50px;
+        }
+        #newsletter-text h4{
+            font-weight: 900;
+            font-size: 30px;
+            line-height: 120%;
+            color: #FAFAFA;
+        }
+        #newsletter-text i{
+            color: #FAFAFA;
+            font-size: 55px;
+        }
+        #newsletter-text p{
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 120%;
+            color: #F0F2F4;
+            margin: 0;
+        }
+        #newsletter-text h5{
+            font-weight: 400;
+            font-size: 25px;
+            line-height: 120%;
+            color: #FAFAFA;
+            margin-bottom: 22px;
+        }
+        #customer-reviews{
+            margin-top: 100px;
+            display: flex;
+            margin: auto;
+            gap: 20px;
+            margin-left: 100px;
+            flex-direction: column;
+        }
+        #customer-reviews h2{
+            font-weight: 700;
+            font-size: 37px;
+            line-height: 120%;
+            color: #1B1C1E;
+        }
+        #customer-reviews p{
+            color: #1B1C1E;
+            font-size: 17px;
+            width: 28%;
+            margin-bottom: 10px;
+            line-height: 160%;
+            text-align: end;
+            font-weight: 500;
+        }
+        #customer-reviews>div>div{
+            margin-top: 10px;
+            width: 300px;
+            height: 10px;
+            background-color: #2AB8B8;
+            clip-path: polygon(0% 0%, 95% 0%, 100% 50%, 95% 100%, 0% 100%);
+        }
+
+
+        #cr-container{
+            margin-left: 100px;
+            display: flex;
+            margin-bottom: 10px;
+            user-select: none;
+        }
+        .cr-slider-container {
+            width: 540px; /* Hiển thị 3 div mỗi div rộng 180px */
+            overflow: hidden;
+            position: relative;
+        }
+        .cr-slider {
+            display: flex;
+            width: 2160px; /* 6 div * 180px * 2 (clone để tạo hiệu ứng lặp vô hạn) */
+            transition: transform 0.5s ease-in-out;
+        }
+        .cr-slide {
+            width: 180px;
+            height: auto;
+            background: #F0F2F4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
+        }
+
+        .cr-slide img{
+            width: 100%;
+            height: 120px;
+            border-radius: 10px;
+        }
+        .cr-slide{
+            border-radius: 10px;
+        }
+        #main-content-container{
+            display: flex;
+            padding: 0 100px;
+            align-items: center;
+        }
+        #img-container{
+            width: 1000px;
+            height: 550px;
+            border-radius: 25px;
+        }
+        #img-container img{
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+        }
+        #div-container{
+            background-color: #F0F2F4;
+            height: 400px;
+            width: 1000px;
+            display: flex;
+            align-items: center;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            padding: 20px 30px;
+        }
+        #div-container div{
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
+            height: 100%;
+        }
+        #main-content-container h5{
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 160%;
+            letter-spacing: 0.05em;
+            color: #1B1C1E;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+        #div-container h3{
+            font-weight: 800;
+            font-size: 24px;
+            line-height: 120%;
+            color: #1B1C1E;
+        }
+        #div-container p{
+            color:#2CB9AD;
+            font-size: 25px;
+        }
+        #footer{
+            width: 100%;
+            height: 486px;
+            position: relative;
+        }
+        #footer-left{
+            row-gap: 10px;
+            padding-top: 100px;
+            padding-left: 150px;
+            display: flex;
+            flex-direction: column;
+            background-image: url('{{ asset('storage/home/footer-shape.png') }}');
+            width: 490px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: right;
+            height: 486px;
+
+        }
+        #footer-left>p{
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .footer-icon{
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            cursor: pointer;
+            color: #FAFAFA;
+            transition: color 1s ease;
+        }
+        .footer-icon:hover{
+            color: #1B1C1E;
+        }
+        .footer-icon i{
+            font-weight: 100;
+            font-size: 25px;
+        }
+        #footer-left>p{
+            font-size: 15px;
+            margin: 15px 0;
+        }
+        #footer-logo{
+            display: flex;
+            gap: 30px;
+        }
+        #footer-logo i{
+            color: #FAFAFA;
+            font-size: 30px;
+            transition: color 1s ease-in-out;
+            cursor: pointer;
+        }
+        #footer-logo i:hover{
+            color: #1B1C1E;
+        }
+        #footer h4{
+            font-size: 20px;
+            color: #FAFAFA;
+            margin-top: 10px;
+        }
+        #footer h5{
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        #footer-logo-car{
+            position: absolute;
+            top: 100px;
+            left: 40%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: auto;
+        }
+        #footer-logo-car img, #footer-car img{
+            width: 100%;
+            height: auto;
+        }
+        #footer-car{
+            position: absolute;
+            right: 150px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+        }
+        #scrollToTop{
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #3ECCC0;
+            color: black;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1003;
+            font-size: 25px;
+            border: none;
+            cursor: pointer;
+        }
+        #scrollToTop:hover{
+            background-color: #06c6b6;
+        }
     </style>
 </head>
 <body>
@@ -1404,10 +1067,10 @@
         <img src="{{ asset('storage/home/logo.png') }}" alt="Logo">
         <div id="header-menu-login">
             <div id="header-menu">
-                <li><a href="#" id="menu-main">Trang chủ</a></li>
-                <li><a href="#">Thuê xe</a></li>
-                <li><a href="#">Về chúng tôi</a></li>
-                <li><a href="#">Liên hệ</a></li>
+                <li><a href="/" id="menu-main">Trang chủ</a></li>
+                <li><a href="/car">Thuê xe</a></li>
+                <li><a href="about">Về chúng tôi</a></li>
+                <li><a href="/contact">Liên hệ</a></li>
             </div>
             <div id="Login">
                 @if (Route::has('login'))
@@ -1464,6 +1127,19 @@
                 <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logolexus.png') }}" alt="logo-item"></div>
                 <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logomer.jpg') }}" alt="logo-item"></div>
                 <div class="logo-items"><img  src="{{ asset('storage/home/home-logo/logorr.jpg') }}" alt="logo-item"></div>
+            </div>
+        </div>
+    </div>
+    <div id="prev-next">
+        <div id="prev-next-btn">
+            <button class="btn prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="btn next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+        <div id="prev-next-text">
+            <p>Lựa chọn cẩn thận, những gì tốt nhất cho một chuyến đi khó quên</p>
+            <div>
+                <h2>the most beautiful</h2>
+                <div></div>
             </div>
         </div>
     </div>
@@ -1539,12 +1215,260 @@
                 </div>
                 @endforeach
             </div>
-            <button class="btn prev" onclick="moveSlide(-1)">&#10094;</button>
-            <button class="btn next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </div>
+    <div id="how-to-book">
+        <div>
+            <h2>Cách để đặt xe</h2>
+            <div></div>
+        </div>
+        <p>Quy trình đặt xe dễ dàng, nhận ngay chiếc xe mơ ước của bạn chỉ trong vài phút</p>
+    </div>
+    <div id="book-area">
+        <div class="book-area-1">
+            <h5>Bước 1:</h5>
+            <p>Chọn xe bạn thích</p>
+        </div>
+        <div class="book-area-2">
+            <img src="{{ asset('storage/home/arrow-shape.png') }}" alt="car">
+            <div>
+                <h5>Bước 2:</h5>
+                <p>Điền vào biểu mẫu</p>
+            </div>
+        </div>
+        <div class="book-area-3">
+            <img src="{{ asset('storage/home/arrow-shape.png') }}" alt="car">
+            <div>
+                <h5>Bước 3:</h5>
+                <p>Chọn chuyến đi của bạn</p>
+            </div>
+        </div>
+        <div class="book-area-4">
+            <img src="{{ asset('storage/home/car-how-to-book.png') }}" alt="car">
         </div>
     </div>
 
+    <div id="prev-next-2">
+        <div id="prev-next-btn-2">
+            <button class="btn-2 prev-2" onclick="moveSlide2(-1)">&#10094;</button>
+            <button class="btn-2 next-2" onclick="moveSlide2(1)">&#10095;</button>
+        </div>
+        <div id="prev-next-text-2">
+            <p>Tìm chuyến đi lí tưởng của bạn, khám phá những chiếc xe được đánh giá cao nhất của chúng tôi</p>
+            <div>
+                <h2>Top Picks</h2>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <div id="slider-container-center-2">
+        <div class="slider-container-2">
+            <div id="slider-2" class="slider-2">
+                @foreach ($carTopRating as $car)
+                <div class="slide-2">
+                    <img src="{{ asset('storage/' . $car->image_url) }}" alt="{{ $car->name }}">
+                    <div class="slide-car-info-div-2">
+                        <div class="slide-car-info-2">
+                            <h1>Thương hiệu</h1>
+                            <p id="trademark-2">{{$car->trademark}}</p>
+                        </div>
+                        <div class="slide-car-info-2">
+                            <h1>Tên xe</h1>
+                            <p id="name-2">{{$car->name}}</p>
+                        </div>
+                        <div class="slide-car-info-2">
+                            <h1>Giá thuê</h1>
+                            <p><span>{{ number_format($car->price_per_day, 0, ',', '.') }} VND/Ngay</span></p>
+                        </div>
+                        <div class="slide-car-info-2">
+                            <h1>Số chỗ ngồi</h1>
+                            <p>{{$car->seat_count}}</p>
+                        </div>
+                        <div class="slide-car-info-2">
+                            <h1>Số lượng</h1>
+                            <p>{{$car->remaining_quantity}}</p>
+                        </div>
+                        <div class="slide-car-info-2">
+                            <h1>Đánh giá</h1>
+                            <p><span>{{ $car->reviews->avg('rating') ?: 5 }}&#9733;</span></p>
+                        </div>
+                        <div id="slide-a-2">
+                            <a href="/car/show/{{$car->id}}">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                @foreach ($carTopRating as $car)
+                <div class="slide-2">
+                    <img src="{{ asset('storage/' . $car->image_url) }}" alt="{{ $car->name }}">
+                    <div class="slide-car-info-div-2">
+                        <div class="slide-car-info-2">
+                            <h1>Thương hiệu</h1>
+                            <p id="trademark-2">{{$car->trademark}}</p>
+                        </div>
+                        <div class="slide-car-info-2">
+                            <h1>Tên xe</h1>
+                            <p id="name-2">{{$car->name}}</p>
+                        </div>
+                        <div class="slide-car-info-2">
+                            <h1>Giá thuê</h1>
+                            <p><span>{{ number_format($car->price_per_day, 0, ',', '.') }} VND/Ngay</span></p>
+                        </div>
+                        <div class="slide-car-info-2">
+                            <h1>Số chỗ ngồi</h1>
+                            <p>{{$car->seat_count}}</p>
+                        </div>
+                        <div class="slide-car-info-2">
+                            <h1>Số lượng</h1>
+                            <p>{{$car->remaining_quantity}}</p>
+                        </div>
+                        <div class="slide-car-info-2">
+                            <h1>Đánh giá</h1>
+                            <p><span>{{ $car->reviews->avg('rating') ?: 5 }}&#9733;</span></p>
+                        </div>
+                        <div id="slide-a-2">
+                            <a href="/car/show/{{$car->id}}">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <div id="vehicle-categories">
+        <div>
+            <h2>Hãng xe</h2>
+            <div></div>
+        </div>
+        <p>Khám phá một vài mẫu xe hot của chúng tôi, hoàn toàn phù hợp cho nhu cầu du lịch của bạn</p>
+    </div>
+    <div id="trademark-categories">
+        <div id="t-c-1">
+            <div class="image-car"><img src="{{ asset('storage/home/car-image-7.png') }}" alt="car"><p>SUV</p></div>
+            <div id="overlay1"></div>
+        </div>
+        <div id="t-c-2">
+            <div class="image-car"><img src="{{ asset('storage/home/car-image-9.png') }}" alt="car"><p>Sedan</p></div>
+            <div id="overlay2"></div>
+        </div>
+        <div id="t-c-3">
+            <div class="image-car"><img src="{{ asset('storage/home/car-image-8.png') }}" alt="car"><p>Sports</p></div>
+            <div id="overlay3"></div>
+        </div>
+    </div>
+    <div id="why-choose-us">
+        <p>Khám phá Ưu điểm của DriveLux: Dịch vụ vô song & Trải nghiệm khó quên đang chờ đón</p>
+        <div>
+            <h2>Tại sao nên chọn chúng tôi</h2>
+            <div></div>
+        </div>
+    </div>
+    <div id="why-choose-us-2">
+        <div>
+            <div><img src="{{ asset('storage/home/home-chooseUs/sports-car-icon.png') }}" alt="hero-bg"></div>
+            <h4>Nhiều hãng xe sang trọng</h4>
+        </div>
+        <div>
+            <div><img src="{{ asset('storage/home/home-chooseUs/vacuum-icon.png') }}" alt="hero-bg"></div>
+            <h4>Bảo dưỡng tốt và sạch sẽ</h4>
+        </div>
+        <div>
+            <div><img src="{{ asset('storage/home/home-chooseUs/booking-icon.png') }}" alt="hero-bg"></div>
+            <h4>Đặt xe dễ dàng</h4>
+        </div>
+        <div>
+            <div><img src="{{ asset('storage/home/home-chooseUs/service-icon.png') }}" alt="hero-bg"></div>
+            <h4>Nhân viên tư vấn nhiệt tình</h4>
+        </div>
+    </div>
+    <div id="newsletter">
+        <div id="newsletter-text">
+            <div>
+                <i class='bx bx-phone'></i>
+                <h4>0123 456 789</h4>
+            </div>
+            <h5>Gọi chúng tôi</h5>
+            <p>Chúng tôi luôn sẵn sàng giúp bạn</p>
+        </div>
+        <div id="newsletter-form">
+            <p>Cập nhật email của bạn</p>
+            <input type="email" placeholder="Email">
+            <a href="#">Đăng ký</a>
+        </div>
+    </div>
+    <div id="customer-reviews">
+        <div>
+            <h2>Khách hàng đánh giá</h2>
+            <div></div>
+        </div>
+        <p>Cùng xem khách hàng của chúng tôi đã nói gì về trải nghiệm của họ tại DriveLux</p>
+    </div>
 
+    <div id="cr-container">
+        <div class="cr-slider-container">
+            <div id="cr-slider" class="cr-slider">
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-1.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-2.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-3.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-4.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-5.jpg') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-6.jpg') }}" alt="customer"></div>
+
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-1.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-2.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-3.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-4.png') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-5.jpg') }}" alt="customer"></div>
+                <div class="cr-slide"><img src="{{ asset('storage/home/cr/cr-6.jpg') }}" alt="customer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thẻ div chứa ảnh chính và nội dung -->
+    <div id="main-content-container">
+        <div id="div-container">
+            <div>
+                <h3 id="customername">Nguyen Van Long</h3>
+                <p>&starf;&starf;&starf;&starf;&starf;</p>
+                <h5 id="main-text">"Thuê xe từ DriveLux là một trải nghiệm thật sự rất tuyệt vời. Dịch vụ khách hàng tuyệt vời, & chiếc xe tôi chọn vượt xa mọi mong đợi. Xử lý mượt mà, nội thất sang trọng và chuyến đi khó quên. Tôi thực sự giới thiệu DriveLux cho bất kỳ ai đang tìm kiếm trải nghiệm thuê xe đáng chú ý"</h5>
+            </div>
+        </div>
+        <div id="img-container">
+            <img id="main-image" src="{{ asset('storage/home/cr/cr-2.png') }}" alt="">
+        </div>
+    </div>
+    <div id="footer">
+        <div id="footer-left">
+            <div class="footer-icon">
+                <i class='bx bx-phone'></i>
+                <p>02414123123</p>
+            </div>
+            <div class="footer-icon">
+                <i class='bx bx-envelope'></i>
+                <p>hoang@gmail.com</p>
+            </div>
+            <div class="footer-icon">
+                <i class='bx bx-map'></i>
+                <p>12 Yên Nghĩa, Hà Đông, Hà Nội</p>
+            </div>
+            <p>Monday - Friday: 08:00 AM - 06:00 PM</p>
+            <div id="footer-logo">
+                <i class='bx bxl-instagram'></i>
+                <i class='bx bxl-facebook'></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class='bx bx-envelope'></i>
+            </div>
+            <h4>© 2024 All rights are reserved by</h4>
+            <h5>Drivelux</h5>
+        </div>
+        <div id="footer-logo-car">
+            <img src="{{ asset('storage/home/logo.png') }}" alt="">
+        </div>
+        <div id="footer-car">
+            <img src="{{ asset('storage/home/car-image-2.png') }}" alt="">
+        </div>
+    </div>
+    <button id="scrollToTop">↑</button>
     <script>
         let index = 0;
         const totalSlides = 6;
@@ -1605,6 +1529,173 @@
 
         slider.addEventListener('mouseup', () => isDragging = false);
         slider.addEventListener('mouseleave', () => isDragging = false);
+
+        //slider-2
+        let index2 = 0;
+        const totalSlides2 = 6;
+        const visibleSlides2 = 3;
+        const slider2 = document.getElementById('slider-2');
+        let autoSlide2 = setInterval(() => moveSlide2(1), 5000);
+        let isDragging2 = false;
+        let startX2;
+
+        function moveSlide2(direction2) {
+            index2 += direction2;
+            if (index2 > totalSlides2) {
+                index2 = 1;
+                slider2.style.transition = 'none';
+                slider2.style.transform = `translateX(0px)`;
+                setTimeout(() => {
+                    slider2.style.transition = 'transform 0.5s ease-in-out';
+                    slider2.style.transform = `translateX(${-index2 * 400}px)`;
+                }, 50);
+                return;
+            }
+            if (index2 < 0) {
+                index2 = totalSlides2 - 1;
+                slider2.style.transition = 'none';
+                slider2.style.transform = `translateX(${-totalSlides2 * 400}px)`;
+                setTimeout(() => {
+                    slider2.style.transition = 'transform 0.5s ease-in-out';
+                    slider2.style.transform = `translateX(${-index2 * 400}px)`;
+                }, 50);
+                return;
+            }
+            slider2.style.transform = `translateX(${-index2 * 400}px)`;
+            resetAutoSlide2();
+        }
+
+        function resetAutoSlide2() {
+            clearInterval(autoSlide2);
+            autoSlide2 = setInterval(() => moveSlide2(1), 5000);
+        }
+
+        slider2.addEventListener('mousedown', (e) => {
+            isDragging2 = true;
+            startX2 = e.pageX;
+        });
+
+        slider2.addEventListener('mousemove', (e) => {
+            if (!isDragging2) return;
+            let moveX2 = e.pageX - startX2;
+            if (moveX2 > 50) {
+                moveSlide2(-1);
+                isDragging2 = false;
+            }
+            if (moveX2 < -50) {
+                moveSlide2(1);
+                isDragging2 = false;
+            }
+        });
+
+        slider2.addEventListener('mouseup', () => isDragging2 = false);
+        slider2.addEventListener('mouseleave', () => isDragging2 = false);
+
+        //Customer reviews
+        let index3 = 0;
+        const totalSlides3 = 6;
+        const visibleSlides3 = 3;
+        const slider3 = document.getElementById('cr-slider');
+        const mainImage = document.getElementById('main-image');
+        const mainText = document.getElementById('main-text');
+        let autoSlide3 = setInterval(() => moveSlide3(1), 5000);
+        let isDragging3 = false;
+        let startX3;
+        let customerName = document.getElementById('customername')
+
+        const names = {
+            "cr-1.png": 'Nguyen Van Nam',
+            "cr-2.png": 'Nguyen Van long',
+            "cr-3.png": 'phung Van anh',
+            "cr-4.png": 'Nguyen thi ha',
+            "cr-5.jpg": 'Nguyen Phuc luong',
+            "cr-6.jpg": 'Tran Van Mieu',
+        }
+        const captions = {
+            "cr-1.png": '"DriveLux mang đến một dịch vụ thuê xe đẳng cấp, từ quy trình đặt xe nhanh chóng đến sự tận tâm của đội ngũ hỗ trợ khách hàng. Chiếc xe tôi nhận được không chỉ sạch sẽ, bảo dưỡng tốt mà còn có đầy đủ tiện nghi hiện đại. Chuyến đi thật thoải mái và tuyệt vời!"',
+            "cr-2.png": '"Thuê xe từ DriveLux là một trải nghiệm thật sự rất tuyệt vời. Dịch vụ khách hàng tuyệt vời, & chiếc xe tôi chọn vượt xa mọi mong đợi. Xử lý mượt mà, nội thất sang trọng và chuyến đi khó quên. Tôi thực sự giới thiệu DriveLux cho bất kỳ ai đang tìm kiếm trải nghiệm thuê xe đáng chú ý"',
+            "cr-3.png": '"Chưa bao giờ tôi cảm thấy việc thuê xe lại dễ dàng và chuyên nghiệp đến vậy! DriveLux thực sự làm tốt từ việc cung cấp thông tin minh bạch, quy trình nhận/trả xe nhanh gọn đến những chiếc xe chất lượng cao. Dịch vụ xuất sắc, xe lái êm ái và trải nghiệm cực kỳ đáng nhớ!',
+            "cr-4.png": '"Tôi hoàn toàn hài lòng với dịch vụ của DriveLux! Nhân viên hỗ trợ tận tình, giúp tôi chọn được chiếc xe ưng ý, đúng với nhu cầu. Xe sạch sẽ, sang trọng, động cơ mạnh mẽ và chuyến đi thật sự suôn sẻ. Đây chắc chắn là lựa chọn hàng đầu của tôi mỗi khi cần thuê xe."',
+            "cr-5.jpg": '"DriveLux không chỉ mang đến những chiếc xe sang trọng mà còn tạo ra một trải nghiệm thuê xe hoàn hảo. Từ việc đặt xe online tiện lợi, giao nhận xe đúng giờ đến chất lượng xe tuyệt vời – tất cả đều rất chuyên nghiệp. Tôi cảm thấy mình đang sử dụng một dịch vụ đẳng cấp thực sự!"',
+            "cr-6.jpg": '"Dịch vụ thuê xe của DriveLux thực sự làm tôi ấn tượng! Xe có nhiều tùy chọn cao cấp, nội thất hiện đại và vận hành êm ái. Nhân viên hỗ trợ cực kỳ thân thiện, sẵn sàng giúp đỡ ngay khi cần. Đây chính là trải nghiệm thuê xe mà ai cũng nên thử một lần!"'
+        };
+
+        function moveSlide3(direction) {
+            index3 += direction;
+            if (index3 > totalSlides3) {
+                index3 = 1;
+                slider3.style.transition = 'none';
+                slider3.style.transform = `translateX(0px)`;
+                setTimeout(() => {
+                    slider3.style.transition = 'transform 0.5s ease-in-out';
+                    slider3.style.transform = `translateX(${-index3 * 180}px)`;
+                }, 50);
+            } else if (index3 < 0) {
+                index3 = totalSlides3 - 1;
+                slider3.style.transition = 'none';
+                slider3.style.transform = `translateX(${-totalSlides3 * 180}px)`;
+                setTimeout(() => {
+                    slider3.style.transition = 'transform 0.5s ease-in-out';
+                    slider3.style.transform = `translateX(${-index3 * 180}px)`;
+                }, 50);
+            } else {
+                slider3.style.transform = `translateX(${-index3 * 180}px)`;
+            }
+            updateMainContent();
+            resetAutoSlide3();
+        }
+
+        function resetAutoSlide3() {
+            clearInterval(autoSlide3);
+            autoSlide3 = setInterval(() => moveSlide3(1), 5000);
+        }
+
+        function updateMainContent() {
+            const slides3 = document.querySelectorAll('.cr-slide img');
+            const middleIndex = (index3 + 1) % totalSlides3; // Lấy ảnh giữa
+            let newSrc = slides3[middleIndex].src.split('/').pop(); // Lấy tên file ảnh
+            mainImage.src = slides3[middleIndex].src;
+            mainText.textContent = captions[newSrc] || "Hình ảnh đặc biệt, chưa có mô tả.";
+            customerName.textContent = names[newSrc];
+        }
+
+        slider3.addEventListener('mousedown', (e) => {
+            isDragging3 = true;
+            startX3 = e.pageX;
+        });
+
+        slider3.addEventListener('mousemove', (e) => {
+            if (!isDragging3) return;
+            let moveX3 = e.pageX - startX3;
+            if (moveX3 > 50) {
+                moveSlide3(-1);
+                isDragging3 = false;
+            }
+            if (moveX3 < -50) {
+                moveSlide3(1);
+                isDragging3 = false;
+            }
+        });
+
+        slider3.addEventListener('mouseup', () => isDragging3 = false);
+        slider3.addEventListener('mouseleave', () => isDragging3 = false);
+
+        //
+        const scrollToTop = document.getElementById("scrollToTop");
+            window.onscroll = function(){
+                if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100){
+                    scrollToTop.style.display = "block";
+                }
+                else{
+                    scrollToTop.style.display = "none";
+                }
+            }
+            scrollToTop.addEventListener("click",() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                })
+            })
     </script>
 </body>
 </html>
