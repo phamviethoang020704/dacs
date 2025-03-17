@@ -74,7 +74,6 @@ class CarSeeder extends Seeder
             'remaining_quantity' => '3',
             'image_url' => 'cars/q5-2021.jpg'
         ],
-        //Bentley
         [
             'trademark' => 'Bentley',
             'description' => 'Chiếc xe này có thiết kế thể thao với đường nét sắc sảo, thân xe màu bạc bóng loáng cùng lưới tản nhiệt nổi bật. Đèn pha LED hiện đại cùng cản trước khí động học mang đến vẻ mạnh mẽ và năng động. Bộ mâm 18 inch và lốp bám đường giúp chiếc xe vận hành ổn định và êm ái. Nội thất sang trọng với các chi tiết tinh tế, mang lại trải nghiệm lái thú vị và thoải mái.',

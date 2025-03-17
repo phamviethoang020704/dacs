@@ -1,0 +1,407 @@
+/* Thiết lập chung cho trang web */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f3f4f6; /* Màu nền xám nhạt */
+}
+
+/* Container chính chiếm toàn bộ chiều cao màn hình và căn giữa nội dung */
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Thẻ chính chứa form và hình ảnh */
+.card {
+  background-color: white;
+  border-radius: 0.5rem; /* Bo tròn góc */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 70rem; /* Chiều rộng tối đa của thẻ */
+}
+
+/* Phần chứa form nhập liệu */
+.form-section {
+  padding: 2rem; /* Đệm xung quanh */
+  width: 100%;
+  transition: transform 0.5s ease, opacity 0.4s ease; /* Thiết lập hiệu ứng chuyển đổi mượt mà */
+  transform: translateX(0); /* Vị trí ban đầu ổn định */
+  opacity: 1; /* Độ trong suốt ban đầu là 100% */
+  position: relative; /* Cho phép phân lớp */
+  z-index: 2; /* Đảm bảo form nổi lên trên ảnh khi có animation */
+  background-color: white; /* Ngăn hiệu ứng trong suốt không mong muốn */
+}
+
+/* Các lớp animation cho hiệu ứng trượt */
+/* Lớp trượt vào từ bên phải */
+.slide-in-right {
+  animation: slideInRight 0.5s forwards; /* Áp dụng animation và giữ trạng thái cuối cùng */
+}
+
+/* Lớp trượt vào từ bên trái */
+.slide-in-left {
+  animation: slideInLeft 0.5s forwards;
+}
+
+/* Lớp trượt ra bên phải */
+.slide-out-right {
+  animation: slideOutRight 0.5s forwards;
+}
+
+/* Lớp trượt ra bên trái */
+.slide-out-left {
+  animation: slideOutLeft 0.5s forwards;
+}
+
+/* Định nghĩa các keyframe animation cho hiệu ứng trượt */
+/* Animation trượt vào từ bên phải */
+@keyframes slideInRight {
+  from {
+    opacity: 0; /* Bắt đầu với độ trong suốt 0 */
+    transform: translateX(30%); /* Di chuyển phần tử từ bên phải (giảm khoảng cách để mượt hơn) */
+  }
+  to {
+    opacity: 1; /* Kết thúc với độ trong suốt 100% */
+    transform: translateX(0); /* Về vị trí gốc */
+  }
+}
+
+/* Animation trượt vào từ bên trái */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30%); /* Di chuyển phần tử từ bên trái */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation trượt ra bên phải */
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0); /* Bắt đầu từ vị trí gốc */
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30%); /* Biến mất về bên phải */
+  }
+}
+
+/* Animation trượt ra bên trái */
+@keyframes slideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30%); /* Biến mất về bên trái */
+  }
+}
+
+/* Phần thương hiệu (logo và tên) */
+.brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem; /* Khoảng cách với phần dưới */
+}
+
+/* Chấm tròn màu đỏ trong logo */
+.brand-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: #2CB9AD; /* Màu đỏ */
+  border-radius: 9999px; /* Tròn hoàn toàn */
+  margin-right: 0.5rem; /* Khoảng cách với phần text */
+}
+
+/* Văn bản thương hiệu */
+.brand-text {
+  font-size: 1.125rem; /* Cỡ chữ */
+  font-weight: 600; /* Độ đậm */
+}
+
+/* Menu điều hướng */
+.nav {
+  gap: 1rem; /* Khoảng cách giữa các mục */
+  margin-left: 30px; /* Lề trái */
+}
+
+/* Liên kết trong menu */
+.nav-link {
+  color: #4b5563; /* Màu chữ xám */
+  text-decoration: none;
+}
+
+/* Tiêu đề phụ */
+.subtitle {
+  color: #6b7280; /* Màu chữ xám */
+  font-size: 0.875rem; /* Cỡ chữ nhỏ */
+  margin-bottom: 0.5rem; /* Khoảng cách dưới */
+}
+
+/* Tiêu đề chính */
+.title {
+  font-size: 1.875rem; /* Cỡ chữ lớn */
+  font-weight: 700; /* Độ đậm cao */
+  margin-bottom: 0.5rem; /* Khoảng cách dưới */
+}
+
+/* Văn bản đăng nhập */
+.login-text {
+  color: #6b7280; /* Màu chữ xám */
+  margin-bottom: 1.5rem; /* Khoảng cách dưới */
+}
+
+/* Liên kết đăng nhập */
+.login-link {
+  color: #3b82f6; /* Màu xanh */
+  text-decoration: none;
+}
+
+/* Hàng chứa các trường form */
+.form-row {
+  display: flex;
+  gap: 1rem; /* Khoảng cách giữa các trường */
+  margin-bottom: 1rem; /* Khoảng cách dưới */
+}
+
+/* Nhóm form (label + input) */
+.form-group {
+  flex: 1;
+}
+
+/* Nhãn trường nhập liệu */
+.form-label {
+  display: block;
+  color: #6b7280; /* Màu chữ xám */
+  font-size: 0.875rem; /* Cỡ chữ nhỏ */
+  margin-bottom: 0.25rem; /* Khoảng cách dưới */
+}
+
+/* Container chứa input và icon */
+.input-container {
+  position: relative;
+}
+
+/* Trường nhập liệu */
+.form-input {
+  width: 100%;
+  padding: 0.5rem 1rem; /* Đệm trong */
+  border: 2px solid #d1d5db; /* Viền dày hơn và đậm hơn */
+  border-radius: 1rem; /* Bo tròn góc nhiều hơn */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+/* Hiệu ứng khi focus vào input */
+.form-input:focus {
+  outline: none;
+  border-color: #2CB9AD; /* Khớp với màu thương hiệu */
+  box-shadow: 0 0 0 3px rgba(12, 103, 83, 0.2); /* Hiệu ứng viền sáng đỏ khi focus */
+}
+
+/* Icon trong input */
+.input-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.75rem;
+  color: #9ca3af; /* Màu xám */
+}
+
+/* Hàng chứa các nút */
+.button-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 30px;
+  margin-bottom: 1.5rem; /* Khoảng cách dưới */
+}
+
+/* Nút chính */
+.btn-primary {
+  background-color: #2CB9AD; /* Màu nền đỏ */
+  color: white;
+  padding: 0.5rem 1rem; /* Đệm trong */
+  border-radius: 0.5rem; /* Bo tròn góc */
+  border: none;
+  cursor: pointer;
+}
+
+/* Phần chứa hình ảnh */
+.image-section {
+  position: relative; /* Cho phép phân lớp */
+  width: 100%;
+  height: 600px; /* Chiều cao cố định */
+  min-height: 600px; /* Đảm bảo chiều cao tối thiểu */
+  z-index: 1; /* Đặt ở lớp dưới form trong quá trình animation */
+}
+
+/* Hình ảnh bìa */
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Logo */
+.logo {
+  position: absolute;
+  bottom: 1rem; /* Vị trí dưới */
+  right: 1rem; /* Vị trí phải */
+  width: 2.5rem; /* Chiều rộng */
+  height: 2.5rem; /* Chiều cao */
+}
+
+/* Form check styles */
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.form-check-input {
+  margin-right: 0.5rem;
+}
+
+/* Forgot password link */
+.forgot-password-link {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Media queries - Điều chỉnh giao diện theo kích thước màn hình */
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row; /* Đổi thành hiển thị hàng ngang khi màn hình đủ rộng */
+    height: 600px; /* Chiều cao thẻ cố định */
+  }
+  
+  .form-section {
+    width: 40%; /* Giảm từ 50% để dành không gian cho hình ảnh */
+    overflow-y: visible; /* Ngăn cuộn */
+  }
+  
+  .image-section {
+    width: 60%; /* Tăng từ 50% để phần hình ảnh rộng hơn */
+    height: 100%; /* Chiều cao đầy đủ so với thẻ cha */
+  }
+}
+
+/* Kiểu dáng tương thích nâng cao */
+/* Thiết bị rất nhỏ (điện thoại) */
+@media (max-width: 576px) {
+  .card {
+    flex-direction: column;
+    max-height: none;
+  }
+  
+  .form-section {
+    width: 100%;
+    padding: 1.5rem;
+  }
+  
+  .image-section {
+    width: 100%;
+    height: 300px;
+    min-height: 300px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+}
+
+/* Thiết bị nhỏ (máy tính bảng) */
+@media (min-width: 577px) and (max-width: 767px) {
+  .card {
+    flex-direction: column;
+  }
+  
+  .form-section {
+    width: 100%;
+  }
+  
+  .image-section {
+    width: 100%;
+    height: 400px;
+    min-height: 400px;
+  }
+}
+
+/* Thiết bị trung bình (máy tính bảng ngang, laptop nhỏ) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .card {
+    height: 550px;
+    max-width: 90%;
+  }
+  
+  .form-section {
+    width: 45%;
+    padding: 1.5rem;
+  }
+  
+  .image-section {
+    width: 55%;
+  }
+}
+
+/* Thiết bị lớn (laptop, máy tính để bàn) */
+@media (min-width: 992px) {
+  .card {
+    height: 600px;
+  }
+  
+  .form-section {
+    width: 40%;
+  }
+  
+  .image-section {
+    width: 60%;
+  }
+}
+
+/* Thiết bị rất lớn (máy tính để bàn cỡ lớn) */
+@media (min-width: 1200px) {
+  .card {
+    height: 650px;
+  }
+}
+
+/* Điều chỉnh theo tỷ lệ khung hình */
+@media (max-aspect-ratio: 1/1) {
+  .card {
+    flex-direction: column;
+  }
+  
+  .form-section,
+  .image-section {
+    width: 100%;
+  }
+  
+  .image-section {
+    height: 40vh;
+    min-height: 350px;
+  }
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .card {
+    max-width: 75%;
+    height: 80vh;
+  }
+  
+  .form-section {
+    padding: 2rem 3rem;
+  }
+}
