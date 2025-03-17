@@ -24,7 +24,7 @@
             <div id="header-menu">
                 <li><a href="/">Trang chủ</a></li>
                 <li><a href="/car">Thuê xe</a></li>
-                <li><a href="/about">Về chúng tôi</a></li>
+                <li><a href="/about">Về DriveLux</a></li>
                 <li><a href="/contact" id="menu-main">Liên hệ</a></li>
             </div>
             <div id="Login">

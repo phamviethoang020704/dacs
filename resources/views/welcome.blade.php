@@ -970,7 +970,7 @@
             padding-left: 150px;
             display: flex;
             flex-direction: column;
-            background-image: url('{{ asset('storage/home/footer-shape.png') }}');
+            background-image: url("{{ asset('storage/home/footer-shape.png') }}");
             width: 490px;
             background-size: cover;
             background-repeat: no-repeat;
@@ -1069,7 +1069,7 @@
             <div id="header-menu">
                 <li><a href="/" id="menu-main">Trang chủ</a></li>
                 <li><a href="/car">Thuê xe</a></li>
-                <li><a href="about">Về chúng tôi</a></li>
+                <li><a href="about">Về DriveLux</a></li>
                 <li><a href="/contact">Liên hệ</a></li>
             </div>
             <div id="Login">
