@@ -26,16 +26,14 @@
        </nav>
      </div>
 
-     <h2 class="subtitle">
-      START FOR FREE
-     </h2>
+    
      <h1 class="title">
-      Create new account.
+      Tạo tài khoản mới.
      </h1>
      <p class="login-text">
-      Already A Member?
+      Bạn đã là thành viên ?
       <a class="login-link" href="{{ route('login') }}">
-       Log In
+       Đăng nhập
       </a>
      </p>
      <form method="POST" action="{{ route('register') }}">
@@ -43,7 +41,7 @@
       <div class="form-row">
        <div class="form-group">
         <label class="form-label" for="name">
-         Name
+         Tên của bạn
         </label>
         <div class="input-container">
          <input class="form-input @error('name') is-invalid @enderror" id="name" name="name" type="text" value="{{ old('name') }}" required autocomplete="name" autofocus/>
@@ -59,7 +57,7 @@
        
        <div class="form-group">
         <label class="form-label" for="phone">
-         Phone
+         Số điện thoại
         </label>
         <div class="input-container">
          <input class="form-input @error('phone') is-invalid @enderror" id="phone" name="phone" type="tel" 
@@ -94,7 +92,7 @@
 
        <div class="form-group">
         <label class="form-label" for="address">
-         Address
+         Địa chỉ
         </label>
         <div class="input-container">
          <input class="form-input @error('address') is-invalid @enderror" id="address" name="address" type="text" value="{{ old('address') }}" required autocomplete="street-address"/>
@@ -110,7 +108,7 @@
       </div>
       <div class="form-group">
        <label class="form-label" for="password">
-        Password
+        Mật khẩu
        </label>
        <div class="input-container">
         <input class="form-input @error('password') is-invalid @enderror" id="password" name="password" type="password" required autocomplete="new-password"/>
@@ -123,7 +121,7 @@
       </div>
       <div class="form-group">
        <label class="form-label" for="password-confirm">
-        Confirm Password
+        Xác nhận lại mật khẩu
        </label>
        <div class="input-container">
         <input class="form-input" id="password-confirm" name="password_confirmation" type="password" required autocomplete="new-password"/>
@@ -131,7 +129,7 @@
       </div>
       <div class="button-row">
        <button class="btn-primary" type="submit">
-        Create account
+        Tạo tài khoản
        </button>
       </div>
      </form>

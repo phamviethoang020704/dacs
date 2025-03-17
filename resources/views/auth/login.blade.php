@@ -27,15 +27,15 @@
      </div>
 
      <h2 class="subtitle">
-      WELCOME BACK
+      Chào mừng bạn đã trở lại!
      </h2>
      <h1 class="title">
-      Login to your account.
+      Đăng nhập tại đây
      </h1>
      <p class="login-text">
-      Don't have an account?
+      Bạn chưa có tài khoản ?
       <a class="login-link" href="{{ route('register') }}">
-       Register
+       Đăng ký
       </a>
      </p>
 
@@ -65,7 +65,7 @@
       </div>
       <div class="form-group">
        <label class="form-label" for="password">
-        Password
+        Mật khẩu
        </label>
        <div class="input-container">
         <input class="form-input @error('password') is-invalid @enderror" id="password" name="password" type="password" required autocomplete="current-password"/>
@@ -96,7 +96,7 @@
       
       <div class="button-row">
        <button class="btn-primary" type="submit">
-        Login
+        Đăng nhập
        </button>
       </div>
      </form>
